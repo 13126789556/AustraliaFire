@@ -78,12 +78,31 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         if (time >= 2)
         {
-            grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
-            //count the number of firing tiles
-            firingTiles++;
-            print("firing tiles:" + firingTiles);
+            // LZ -->>>>>  count the number of firing tiles
+            int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
+            BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
+            if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
+            {
+                firingTiles++;
+                print("firing tiles:" + firingTiles);
+            }
+            //----------< LZ
+
+            grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
             if (Random.Range(0, 2) > 1)
             {
+                // LZ -->>>>>   count the number of firing tiles
+                randomX = Random.Range(0, grid.Count);
+                randomY = Random.Range(0, grid[0].Count);
+                
+                BM = grid[randomX][randomY].GetComponent<BlockManager>();
+                if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
+                {
+                    firingTiles++;
+                    print("firing tiles:" + firingTiles);
+                }
+                //----------< LZ
+
                 grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
                 //count the number of firing tiles
                 firingTiles++;
