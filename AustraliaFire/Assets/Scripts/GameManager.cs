@@ -70,6 +70,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
+        if (time >= 2)
+        {
+            grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+            if (Random.Range(0, 2) > 1)
+            {
+                grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+
+            }
+            time = 0;
+        }
     }
 
     void GenarateMap()

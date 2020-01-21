@@ -25,6 +25,7 @@ public class BlockManager : MonoBehaviour
     public Vector2Int coordinate;
     [HideInInspector]
     public GameManager gm;
+    private bool fireExtended = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,29 +59,148 @@ public class BlockManager : MonoBehaviour
         switch (type)
         {
             case BlockType.Desert:
-                break;
+                if (status == BlockStatus.Fire)
+                {
+                    status = BlockStatus.Normal;
+                }
+                    break;
             case BlockType.Forest:
                 if(status == BlockStatus.Fire)
                 {
-                    Debug.Log("need fireman");
-                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire};
                     fireTimer -= Time.deltaTime;
-                    if(fireTimer <= 0)
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
                     {
                         type = BlockType.Desert;
                         status = BlockStatus.Normal;
                         GetComponent<Renderer>().materials = new Material[1] { desert };
-                        gm.grid[coordinate.x - 1][coordinate.y].GetComponent<BlockManager>().status = BlockStatus.Fire;
                     }
                 }
                 break;
             case BlockType.Grass:
+                if (status == BlockStatus.Fire)
+                {
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
+                }
                 break;
             case BlockType.Ocean:
+                if (status == BlockStatus.Fire)
+                {
+                    status = BlockStatus.Normal;
+                }
                 break;
             case BlockType.Shrub:
+                if (status == BlockStatus.Fire)
+                {
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
+                }
                 break;
             case BlockType.Wood:
+                if (status == BlockStatus.Fire)
+                {
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
+                }
                 break;
         }
     }
