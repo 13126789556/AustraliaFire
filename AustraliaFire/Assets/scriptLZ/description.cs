@@ -20,12 +20,12 @@ public class description : MonoBehaviour
 
 
     //active the desciption box 
-    public void activeDescription()
+    public void activeDescription(int moneyCost, int FireManCost)
     {
         //update the number of people and money needed every time open the description box
         this.gameObject.SetActive(true);
-        money.text = "Money Cost: " + GM.gold.ToString();
-        people.text = "People Cost: " + GM.fireman.ToString();
+        this.money.text = "Money Cost: " + moneyCost.ToString();
+        this.people.text = "People Cost: " + FireManCost.ToString();
     }
     //de-active the description box
     public void deActiveDescription()
