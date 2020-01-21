@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     Vector3 lastMousePos;
     private float minSize = 1f;
     private float maxSize = 12f;
-    private readonly float _overTime = 0.5f;
     private bool _running;
 
     private void Start()
@@ -22,12 +21,12 @@ public class CameraController : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize < maxSize)
         {
             Camera.main.orthographicSize += 0.5f;
-            speed += 0.0005f;
+            speed *= 1.05f;
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize > minSize)
         {
             Camera.main.orthographicSize -= 0.5f;
-            speed -= 0.0005f;
+            speed /= 1.05f;
         }
         if (Input.GetMouseButton(2) || Input.GetMouseButton(0))
         {

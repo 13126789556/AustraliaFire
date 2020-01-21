@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2450526869906453091
+--- !u!1 &2927952245229918395
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5755221504024177167}
-  - component: {fileID: 1555255346709813572}
-  - component: {fileID: 5905818186089593594}
-  - component: {fileID: 3405115083411974901}
+  - component: {fileID: 8852046421162779764}
+  - component: {fileID: 8286446101921145033}
+  - component: {fileID: 1216194889238764124}
+  - component: {fileID: 8762078413559689672}
+  - component: {fileID: 1211439529909605963}
+  - component: {fileID: 3994999186681899621}
   m_Layer: 0
-  m_Name: ShrubBlock
+  m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5755221504024177167
+--- !u!4 &8852046421162779764
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450526869906453091}
+  m_GameObject: {fileID: 2927952245229918395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1555255346709813572
+--- !u!33 &8286446101921145033
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450526869906453091}
+  m_GameObject: {fileID: 2927952245229918395}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5905818186089593594
+--- !u!23 &1216194889238764124
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450526869906453091}
+  m_GameObject: {fileID: 2927952245229918395}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f918e7a7405f234991d259d5a6560f6, type: 2}
+  - {fileID: 2100000, guid: 052a0aa88cd55364b946ce24d718ff69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,13 +81,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3405115083411974901
+--- !u!64 &8762078413559689672
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450526869906453091}
+  m_GameObject: {fileID: 2927952245229918395}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -93,3 +95,39 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1211439529909605963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927952245229918395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0188c06e6f4942949a92c37c0e69fec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desert: {fileID: 2100000, guid: 052a0aa88cd55364b946ce24d718ff69, type: 2}
+  fire: {fileID: 2100000, guid: aef6564b0cae5fc41a25b1365fbc68d5, type: 2}
+  forest: {fileID: 2100000, guid: 6fecb1d7a260680488188f7d065f7b50, type: 2}
+  grass: {fileID: 2100000, guid: 710068367f7aec14b936a0f8b67e8f09, type: 2}
+  ocean: {fileID: 2100000, guid: e2cc7eb7913254746ac28b867bca688d, type: 2}
+  shrub: {fileID: 2100000, guid: 3f918e7a7405f234991d259d5a6560f6, type: 2}
+  wood: {fileID: 2100000, guid: 280069e11fa7ea4448b0d1f8fd84802f, type: 2}
+  type: 0
+  status: 0
+  hasAnimals: 0
+  coordinate: {x: 0, y: 0}
+--- !u!65 &3994999186681899621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927952245229918395}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 6.1232336e-17}
+  m_Center: {x: 0, y: 0, z: 0}

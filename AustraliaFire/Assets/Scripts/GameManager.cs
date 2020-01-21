@@ -9,18 +9,15 @@ public class GameManager : MonoBehaviour
     public float time;
     public float gold;
     public float fireman;
-    public GameObject desertBlock;
-    public GameObject forestBlock;
-    public GameObject grassBlock;
-    public GameObject oceanBlock;
-    public GameObject shrubBlock;
-    public GameObject woodBlock;
+    public GameObject block;
     //public GameObject valueUI;
     //public GameObject optionUI;
     //public GameObject ;
 
     private char[][] mapData;
     private GameObject map;
+    [HideInInspector]
+    public GameObject[][] grid;
 
     //LZ--->
     //actions players can take
@@ -69,33 +66,45 @@ public class GameManager : MonoBehaviour
                 {
                     //desert
                     case 'd': 
-                        temp = Instantiate(desertBlock, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
+                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
                         temp.transform.SetParent(map.transform);
+                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Desert;
+                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
                         break;
                     //forest
                     case 'f':
-                        temp = Instantiate(forestBlock, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
+                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
                         temp.transform.SetParent(map.transform);
+                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Forest;
+                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
                         break;
                     //grass
                     case 'g':
-                        temp = Instantiate(grassBlock, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
+                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
                         temp.transform.SetParent(map.transform);
+                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Grass;
+                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
                         break;
                     //ocean
                     case 'o':
-                        temp = Instantiate(oceanBlock, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
+                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
                         temp.transform.SetParent(map.transform);
+                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Ocean;
+                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
                         break;
                     //shrub
                     case 's':
-                        temp = Instantiate(shrubBlock, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
+                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
                         temp.transform.SetParent(map.transform);
+                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Shrub;
+                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
                         break;
                     //wood
                     case 'w':
-                        temp = Instantiate(woodBlock, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
+                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
                         temp.transform.SetParent(map.transform);
+                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Wood;
+                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
                         break;
                 }
             }
