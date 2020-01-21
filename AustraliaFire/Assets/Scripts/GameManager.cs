@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     //actions players can take
     public enum actionList { fightFire, saveAnimal, cleanWater, recoverLand};
     [HideInInspector] public actionList curAction;
+    [HideInInspector] public pickAction curActionButton;
     public int curfireManCost;
     public int curMoneyCost;
     //
@@ -47,6 +48,10 @@ public class GameManager : MonoBehaviour
     //
     Ray ray;
     RaycastHit hit;
+    //
+    [HideInInspector] public int firingTiles;
+    [HideInInspector] public int scorchTiles;
+    [HideInInspector] public int pollutedTiles;
 
     //---< LZ
     // Start is called before the first frame update
@@ -64,6 +69,7 @@ public class GameManager : MonoBehaviour
 
         //update resource display at the beginning
         updateResourceDisplay();
+        curActionButton = null;
     }
 
     // Update is called once per frame
@@ -73,13 +79,20 @@ public class GameManager : MonoBehaviour
         if (time >= 2)
         {
             grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+            //count the number of firing tiles
+            firingTiles++;
+            print("firing tiles:" + firingTiles);
             if (Random.Range(0, 2) > 1)
             {
                 grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
-
+                //count the number of firing tiles
+                firingTiles++;
+                print("firing tiles:" + firingTiles);
             }
             time = 0;
         }
+        //check mouse over the map
+        checkMouse();
     }
 
     void GenarateMap()
@@ -158,9 +171,21 @@ public class GameManager : MonoBehaviour
             {
                 if (BM.status == BlockManager.BlockStatus.Fire && curAction == GameManager.actionList.fightFire)
                 {
-                    print("fight fire");
-                    //change the following later
-                    takeAction();
+                    //add: highlight the area
+                    //if click, take action
+                    //add: check if money and people are enough
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        print("fight fire");
+                        //change the following later
+                        BM.status = BlockManager.BlockStatus.Scorch;
+                        //count the number of firing tiles
+                        firingTiles--;
+                        print("firing tiles:" + firingTiles);
+
+                        takeAction();
+                    }
+
                 }
                 else if (BM.status == BlockManager.BlockStatus.Scorch && curAction == GameManager.actionList.recoverLand)
                 {
@@ -179,6 +204,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
     }
     //deduct the cost from the total resource
     private void takeAction()

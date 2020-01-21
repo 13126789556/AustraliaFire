@@ -912,6 +912,21 @@ PrefabInstance:
       propertyPath: m_Text
       value: save animal
       objectReference: {fileID: 0}
+    - target: {fileID: 5699773887544260875, guid: bfc18370bca65b841989864118796c33,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699773887544260875, guid: bfc18370bca65b841989864118796c33,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699773887544260875, guid: bfc18370bca65b841989864118796c33,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5699773887544260878, guid: bfc18370bca65b841989864118796c33,
         type: 3}
       propertyPath: m_AnchorMin.y

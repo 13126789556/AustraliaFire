@@ -131,10 +131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAction: 1
+  thisAction: 2
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
+  moneyCoefficient: 35
+  peopleCoefficient: 1
+  x: 1
+  y: 1
 --- !u!1 &5699773886171268521
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,10 +347,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAction: 0
+  thisAction: 3
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
+  moneyCoefficient: 70
+  peopleCoefficient: 1
+  x: 1
+  y: 1
 --- !u!1 &5699773886420315343
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.7, y: -28.7}
+  m_AnchoredPosition: {x: 41.8, y: -23}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5699773886506160074
@@ -673,8 +681,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -408.62, y: -165.08}
-  m_SizeDelta: {x: 171.75, y: 94.76}
+  m_AnchoredPosition: {x: -364.4, y: -179.69}
+  m_SizeDelta: {x: 145.2, y: 65.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5699773886627227270
 CanvasRenderer:
@@ -932,10 +940,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAction: 0
+  thisAction: 1
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
+  moneyCoefficient: 16
+  peopleCoefficient: 3
+  x: 1
+  y: 1
 --- !u!1 &5699773887055669136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +1024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: recover
 --- !u!1 &5699773887251778023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: save animal
 --- !u!1 &5699773887359135180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1381,10 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 500
   peopleCost: 2
+  moneyCoefficient: 50
+  peopleCoefficient: 1
+  x: 1
+  y: 1
 --- !u!1 &5699773887550548504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,7 +1748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.3, y: 21.3}
+  m_AnchoredPosition: {x: 41.6, y: 5.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5699773887864433806

@@ -9,27 +9,42 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     private GameManager GM;
     public GameManager.actionList thisAction;
     public description description;
-    public int moneyCost;
-    public int peopleCost;
-    
+    //fix following
+    [HideInInspector]public int moneyCost;
+    [HideInInspector]public int peopleCost;
 
+    public int moneyCoefficient = 1;
+    public int peopleCoefficient = 1;
+    public int x;
+    public int y;
+
+    void Start()
+    {
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (thisAction != GameManager.actionList.saveAnimal)
+        {
+            moneyCost = moneyCoefficient * x;
+            peopleCost = peopleCoefficient * y;
+        }
+    }
 
 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //print("MOUSE ON ACTION");
-        description.activeDescription(moneyCost, peopleCost); 
+        if (thisAction != GameManager.actionList.saveAnimal)
+        {
+            description.activeDescription(moneyCost, peopleCost);
+        }
+            
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        description.deActiveDescription();
-        //GetComponent<Outline>().acti
-    }
-    void Start()
-    {
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (thisAction != GameManager.actionList.saveAnimal)
+        {
+            description.deActiveDescription();
+        }
     }
 
     //choose an action
@@ -37,12 +52,20 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         if (GM.gold >= moneyCost && GM.fireman >= peopleCost)
         {
-            //update current action
+            //fix following later (delete)
             GM.curAction = thisAction;
             GM.curfireManCost = peopleCost;
             GM.curMoneyCost = moneyCost;
-            
-            
+            //update current action
+            if (GM.curActionButton != null)
+            {
+                GM.curActionButton.GetComponent<Image>().color = Color.white;
+            }
+            //highlight current action
+            GM.curActionButton = this;
+            GetComponent<Image>().color = Color.yellow;
+
+
         }
         else
         {

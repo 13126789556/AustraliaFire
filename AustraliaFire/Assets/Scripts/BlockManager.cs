@@ -65,10 +65,12 @@ public class BlockManager : MonoBehaviour
                 }
                     break;
             case BlockType.Forest:
-                if(status == BlockStatus.Fire)
+                if (status == BlockStatus.Fire)
                 {
+                    //if on fire, display fire material
                     GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire};
                     fireTimer -= Time.deltaTime;
+                    //after 5s, fire extends
                     if (fireTimer <= 5 && !fireExtended)
                     {
                         fireExtended = true;
@@ -89,6 +91,7 @@ public class BlockManager : MonoBehaviour
                             gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
                         }
                     }
+                    //after 10s, become desert
                     if (fireTimer <= 0)
                     {
                         type = BlockType.Desert;
@@ -96,6 +99,7 @@ public class BlockManager : MonoBehaviour
                         GetComponent<Renderer>().materials = new Material[1] { desert };
                     }
                 }
+
                 break;
             case BlockType.Grass:
                 if (status == BlockStatus.Fire)
@@ -202,6 +206,11 @@ public class BlockManager : MonoBehaviour
                     }
                 }
                 break;
+        }
+        if (status == BlockStatus.Scorch)
+        {
+            //add a scorch material later
+            GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
         }
     }
 }
