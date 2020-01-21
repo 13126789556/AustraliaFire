@@ -21,6 +21,18 @@ public class GameManager : MonoBehaviour
 
     private char[][] mapData;
     private GameObject map;
+
+    //LZ--->
+    //actions players can take
+    public enum actionList { fightFire, cleanWater };
+    [HideInInspector] public actionList curAction;
+    //
+    public Text goldDisplay;
+    public Text fireManDisplay;
+    
+
+
+    //---< LZ
     // Start is called before the first frame update
 
     void Start()
@@ -32,6 +44,9 @@ public class GameManager : MonoBehaviour
         time = 0;
         fireman = 1000;
         GenarateMap();
+
+        //update resource display at the beginning
+        updateResourceDisplay();
     }
 
     // Update is called once per frame
@@ -87,5 +102,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void updateResourceDisplay()
+    {
+        goldDisplay.text = gold.ToString();
+        fireManDisplay.text = fireman.ToString();
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private globalManager GM;
-    public globalManager.actionList thisAction;
+    private GameManager GM;
+    public GameManager.actionList thisAction;
     public description description;
     public int moneyCost;
     public int peopleCost;
@@ -15,7 +15,9 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        print("MOUSE ON ACTION");
         description.activeDescription();
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -25,21 +27,24 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     }
     void Start()
     {
-        GM = GameObject.Find("GM").GetComponent<globalManager>();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    //when click, when if the current money and people are enough
+    //choose an action
     public void OnPointerClick(PointerEventData eventData)
     {
-        
-        if (GM.curMoney >= moneyCost && GM.curPeople >= peopleCost)
+        print("CLICK");
+        if (GM.gold >= moneyCost && GM.fireman >= peopleCost)
         {
             //reduce money and people if any action is taken
             print("button clicked");
-            GM.curMoney -= moneyCost;
-            GM.curPeople -= peopleCost;
+            
             //if have enough $ and people, change the current action to this action
             GM.curAction = thisAction;
+            GM.updateResourceDisplay();
+            //change the following later
+            GM.gold -= moneyCost;
+            GM.fireman -= peopleCost;
         }
         else
         {
