@@ -29,9 +29,7 @@ public class GameManager : MonoBehaviour
     //
     public Text goldDisplay;
     public Text fireManDisplay;
-    
-
-
+   
     //---< LZ
     // Start is called before the first frame update
 
