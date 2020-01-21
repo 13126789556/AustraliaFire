@@ -6,6 +6,22 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null) _instance = FindObjectOfType<GameManager>();
+            if (_instance == null)
+            {
+                var obj = new GameObject();
+                obj.AddComponent<GameManager>();
+                _instance = obj.GetComponent<GameManager>();
+            }
+            return _instance;
+        }
+    }
+
     public float time;
     public float gold;
     public float fireman;
@@ -17,7 +33,7 @@ public class GameManager : MonoBehaviour
     private char[][] mapData;
     private GameObject map;
     [HideInInspector]
-    public GameObject[][] grid;
+    public List<List<GameObject>> grid;
 
     //LZ--->
     //actions players can take
@@ -32,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        grid = new List<List<GameObject>>();
         GameObject tempGO = new GameObject("Map");
         map = tempGO;
         map.transform.position = Camera.main.transform.position;
@@ -53,58 +70,56 @@ public class GameManager : MonoBehaviour
 
     void GenarateMap()
     {
-        Debug.Log(1);
         var rawMapData = Resources.Load<TextAsset>("MapData").ToString();
-        Debug.Log(rawMapData);
         mapData  = rawMapData.Split('\n').Select(c => c.ToCharArray()).ToArray();
-        for (int r = 0; r < mapData.Length; r++)
+        for (int r = 0; r < mapData.Length; r++)    //instantiate into grid
         {
+            grid.Add(new List<GameObject>());
             for (int c = 0; c< mapData[r].Length; c++)
             {
-                GameObject temp;
                 switch (mapData[r][c])
                 {
                     //desert
                     case 'd': 
-                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
-                        temp.transform.SetParent(map.transform);
-                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Desert;
-                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
+                        grid.Last().Add((GameObject) Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                        grid[r].Last().transform.SetParent(map.transform);
+                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Desert;
+                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
                         break;
                     //forest
                     case 'f':
-                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
-                        temp.transform.SetParent(map.transform);
-                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Forest;
-                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
+                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                        grid[r].Last().transform.SetParent(map.transform);
+                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Forest;
+                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
                         break;
                     //grass
                     case 'g':
-                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
-                        temp.transform.SetParent(map.transform);
-                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Grass;
-                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
+                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                        grid[r].Last().transform.SetParent(map.transform);
+                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Grass;
+                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
                         break;
                     //ocean
                     case 'o':
-                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
-                        temp.transform.SetParent(map.transform);
-                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Ocean;
-                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
+                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                        grid[r].Last().transform.SetParent(map.transform);
+                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Ocean;
+                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
                         break;
                     //shrub
                     case 's':
-                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
-                        temp.transform.SetParent(map.transform);
-                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Shrub;
-                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
+                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                        grid[r].Last().transform.SetParent(map.transform);
+                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Shrub;
+                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
                         break;
                     //wood
                     case 'w':
-                        temp = Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1));
-                        temp.transform.SetParent(map.transform);
-                        temp.GetComponent<BlockManager>().type = BlockManager.BlockType.Wood;
-                        temp.GetComponent<BlockManager>().coordinate = new Vector2(c, r);
+                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                        grid[r].Last().transform.SetParent(map.transform);
+                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Wood;
+                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
                         break;
                 }
             }

@@ -22,10 +22,13 @@ public class BlockManager : MonoBehaviour
     private float pollutedTimer = 10;
     private float saveAnimalTimer = 10;
     //[HideInInspector]
-    public Vector2 coordinate;
+    public Vector2Int coordinate;
+    [HideInInspector]
+    public GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameManager.Instance;
         switch (type)
         {
             case BlockType.Desert:
@@ -67,6 +70,7 @@ public class BlockManager : MonoBehaviour
                         type = BlockType.Desert;
                         status = BlockStatus.Normal;
                         GetComponent<Renderer>().materials = new Material[1] { desert };
+                        gm.grid[coordinate.x - 1][coordinate.y].GetComponent<BlockManager>().status = BlockStatus.Fire;
                     }
                 }
                 break;
