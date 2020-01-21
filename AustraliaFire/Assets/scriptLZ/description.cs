@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 public class description : MonoBehaviour
 {
-    private globalManager GM;
+    private GameManager GM;
     private Text money;
     private Text people;
     void Start()
     {
         //find objects
-        GM = GameObject.Find("GM").GetComponent<globalManager>();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         money = this.transform.Find("money").GetComponent<Text>();
         people = this.transform.Find("people").GetComponent<Text>();
         this.gameObject.SetActive(false);
@@ -24,8 +24,8 @@ public class description : MonoBehaviour
     {
         //update the number of people and money needed every time open the description box
         this.gameObject.SetActive(true);
-        money.text = "Money Cost: " + GM.curMoney.ToString();
-        people.text = "People Cost: " + GM.curPeople.ToString();
+        money.text = "Money Cost: " + GM.gold.ToString();
+        people.text = "People Cost: " + GM.fireman.ToString();
     }
     //de-active the description box
     public void deActiveDescription()
