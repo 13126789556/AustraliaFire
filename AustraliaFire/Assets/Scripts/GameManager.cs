@@ -37,12 +37,17 @@ public class GameManager : MonoBehaviour
 
     //LZ--->
     //actions players can take
-    public enum actionList { fightFire, cleanWater };
+    public enum actionList { fightFire, saveAnimal, cleanWater, recoverLand};
     [HideInInspector] public actionList curAction;
+    public int curfireManCost;
+    public int curMoneyCost;
     //
     public Text goldDisplay;
     public Text fireManDisplay;
-   
+    //
+    Ray ray;
+    RaycastHit hit;
+
     //---< LZ
     // Start is called before the first frame update
 
@@ -65,7 +70,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-
     }
 
     void GenarateMap()
@@ -130,5 +134,47 @@ public class GameManager : MonoBehaviour
     {
         goldDisplay.text = gold.ToString();
         fireManDisplay.text = fireman.ToString();
+    }
+
+    //check which tile the mouse is pointing at
+    public void checkMouse()
+    {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
+        {
+            //print(hit.collider.name);
+            BlockManager BM = hit.collider.GetComponent<BlockManager>();
+            if (BM != null)
+            {
+                if (BM.status == BlockManager.BlockStatus.Fire && curAction == GameManager.actionList.fightFire)
+                {
+                    print("fight fire");
+                    //change the following later
+                    takeAction();
+                }
+                else if (BM.status == BlockManager.BlockStatus.Scorch && curAction == GameManager.actionList.recoverLand)
+                {
+                    print("recover");
+                    takeAction();
+                }
+                else if (BM.status == BlockManager.BlockStatus.Polluted && curAction == GameManager.actionList.cleanWater)
+                {
+                    print("clean");
+                    takeAction();
+                }
+                if (BM.hasAnimals && BM.status == BlockManager.BlockStatus.Scorch && curAction == GameManager.actionList.cleanWater)
+                {
+                    print("save animal");
+                    takeAction();
+                }
+            }
+        }
+    }
+    //deduct the cost from the total resource
+    private void takeAction()
+    {
+        gold -= curMoneyCost;
+        fireman -= curfireManCost;
+        updateResourceDisplay();
     }
 }

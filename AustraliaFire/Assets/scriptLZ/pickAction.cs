@@ -11,13 +11,15 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public description description;
     public int moneyCost;
     public int peopleCost;
+    
+
+
 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("MOUSE ON ACTION");
-        description.activeDescription();
-        
+        //print("MOUSE ON ACTION");
+        description.activeDescription(moneyCost, peopleCost); 
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -33,24 +35,22 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     //choose an action
     public void OnPointerClick(PointerEventData eventData)
     {
-        print("CLICK");
         if (GM.gold >= moneyCost && GM.fireman >= peopleCost)
         {
-            //reduce money and people if any action is taken
-            print("button clicked");
-            
-            //if have enough $ and people, change the current action to this action
+            //update current action
             GM.curAction = thisAction;
-            GM.updateResourceDisplay();
-            //change the following later
-            GM.gold -= moneyCost;
-            GM.fireman -= peopleCost;
+            GM.curfireManCost = peopleCost;
+            GM.curMoneyCost = moneyCost;
+            
+            
         }
         else
         {
             print("not enough");
         }
     }
+
+    
 
 
 }
