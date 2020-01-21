@@ -58,3 +58,6 @@ MonoBehaviour:
     type: 3}
   woodBlock: {fileID: 3222423821347091485, guid: bbeb68025618c3f4cb1df095ace5e438,
     type: 3}
+  curAction: 0
+  goldDisplay: {fileID: 0}
+  fireManDisplay: {fileID: 0}
