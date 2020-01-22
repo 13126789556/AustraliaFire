@@ -38,10 +38,10 @@ public class GameManager : MonoBehaviour
     //LZ--->
     //actions players can take
     public enum actionList { fightFire, saveAnimal, cleanWater, recoverLand};
-    [HideInInspector] public actionList curAction;
+    //[HideInInspector] public actionList curAction;
     [HideInInspector] public pickAction curActionButton;
-    public int curfireManCost;
-    public int curMoneyCost;
+    //public int curfireManCost;
+    //public int curMoneyCost;
     //
     public Text goldDisplay;
     public Text fireManDisplay;
@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int firingTiles;
     [HideInInspector] public int scorchTiles;
     [HideInInspector] public int pollutedTiles;
+
+    public pickAction[] actionButtons;
 
     //---< LZ
     // Start is called before the first frame update
@@ -78,9 +80,9 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         if (time >= 2)
         {
-            // LZ -->>>>>  count the number of firing tiles
             int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
             BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
+<<<<<<< HEAD
             if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -99,17 +101,26 @@ public class GameManager : MonoBehaviour
             }
             //----------< LZ
 
+=======
+>>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
             //set a random block to fire
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
             {
+                //count the number of firing tiles
+                countFire(BM,1);
+                //set fire on the tile
                 BM.status = BlockManager.BlockStatus.Fire;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
+=======
+                
+>>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
             }
             //----------< LZ
 
@@ -119,24 +130,17 @@ public class GameManager : MonoBehaviour
                 // LZ -->>>>>   count the number of firing tiles
                 randomX = Random.Range(0, grid.Count);
                 randomY = Random.Range(0, grid[0].Count);
-                
                 BM = grid[randomX][randomY].GetComponent<BlockManager>();
-                if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
-                {
-                    firingTiles++;
-                    print("firing tiles:" + firingTiles);
-                }
+                countFire(BM,1);
                 //----------< LZ
-
                 grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
-                //count the number of firing tiles
-                firingTiles++;
-                print("firing tiles:" + firingTiles);
             }
             time = 0;
         }
         //check mouse over the map
         checkMouse();
+        //deselect
+        deSelectButton();
     }
 
     void GenarateMap()
@@ -203,7 +207,7 @@ public class GameManager : MonoBehaviour
         fireManDisplay.text = fireman.ToString();
     }
 
-    //check which tile the mouse is pointing at
+    //action after clicking the map
     public void checkMouse()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -211,50 +215,103 @@ public class GameManager : MonoBehaviour
         {
             //print(hit.collider.name);
             BlockManager BM = hit.collider.GetComponent<BlockManager>();
-            if (BM != null)
+            if (BM != null && curActionButton != null)
             {
-                if (BM.status == BlockManager.BlockStatus.Fire && curAction == GameManager.actionList.fightFire)
+                if (BM.status == BlockManager.BlockStatus.Fire && curActionButton.thisAction == GameManager.actionList.fightFire && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
                 {
                     //add: highlight the area
                     //if click, take action
-                    //add: check if money and people are enough
                     if (Input.GetMouseButtonDown(0))
                     {
-                        print("fight fire");
+                        print("picked fight fire");
                         //change the following later
                         BM.status = BlockManager.BlockStatus.Scorch;
+                        reduceResource();
                         //count the number of firing tiles
-                        firingTiles--;
-                        print("firing tiles:" + firingTiles);
-
-                        takeAction();
+                        countFire(BM, -1);
                     }
-
                 }
-                else if (BM.status == BlockManager.BlockStatus.Scorch && curAction == GameManager.actionList.recoverLand)
+                else if (BM.status == BlockManager.BlockStatus.Polluted && curActionButton.thisAction == GameManager.actionList.cleanWater && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
                 {
-                    print("recover");
-                    takeAction();
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        print("picked clean water");
+                        //change the following later
+                        BM.status = BlockManager.BlockStatus.Normal;
+                        //count the number of firing tiles
+                        pollutedTiles--;
+                        reduceResource();
+                    }
                 }
-                else if (BM.status == BlockManager.BlockStatus.Polluted && curAction == GameManager.actionList.cleanWater)
+                else if (BM.status == BlockManager.BlockStatus.Scorch && curActionButton.thisAction == GameManager.actionList.recoverLand && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
                 {
-                    print("clean");
-                    takeAction();
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        print("picked recover land");
+                        //change the following later
+                        BM.status = BlockManager.BlockStatus.Normal;
+                        //count the number of firing tiles
+                        scorchTiles--;
+                        reduceResource();
+                    }
                 }
-                if (BM.hasAnimals && BM.status == BlockManager.BlockStatus.Scorch && curAction == GameManager.actionList.cleanWater)
+                
+                //add later: add animal cost to block manager
+                if (BM.hasAnimals && BM.status == BlockManager.BlockStatus.Scorch && curActionButton.thisAction == GameManager.actionList.cleanWater)
                 {
                     print("save animal");
-                    takeAction();
+                    reduceResource();
                 }
             }
         }
-
     }
     //deduct the cost from the total resource
-    private void takeAction()
+    private void reduceResource()
     {
-        gold -= curMoneyCost;
-        fireman -= curfireManCost;
+        gold -= curActionButton.moneyCost;
+        fireman -= curActionButton.peopleCost;
         updateResourceDisplay();
+    }
+
+    void deSelectButton()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (curActionButton != null)
+            {
+                curActionButton.GetComponent<Image>().color = Color.white;
+                curActionButton = null;
+            }
+            
+            
+        }
+    }
+    public void countFire(BlockManager BM, int add)
+    {
+        if (add >0 && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
+        {
+            firingTiles++;
+        }
+        else if (add < 0)
+        {
+            firingTiles--;
+        }
+        print("firing tiles:" + firingTiles);
+    }
+    public void countOceanPollute(BlockManager BM)
+    {
+        if (BM.status != BlockManager.BlockStatus.Polluted)
+        {
+            pollutedTiles++;
+            print("polluted tiles:" + pollutedTiles);
+        }
+    }
+    public void countScortchLand(BlockManager BM)
+    {
+        if (BM.status != BlockManager.BlockStatus.Scorch)
+        {
+            scorchTiles++;
+            print("scortch tiles:" + scorchTiles);
+        }
     }
 }

@@ -21,11 +21,72 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     void Start()
     {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GetComponent<Image>().color = Color.gray;
         if (thisAction != GameManager.actionList.saveAnimal)
         {
             moneyCost = moneyCoefficient * x;
             peopleCost = peopleCoefficient * y;
         }
+    }
+
+    void Update()
+    {
+        switch (thisAction)
+        {
+            case GameManager.actionList.fightFire:
+                if (GM.firingTiles <= 0)
+                {
+                    
+                    GetComponent<Image>().color = Color.gray;
+                }
+                else
+                {
+                    if(GM.curActionButton == this)
+                    {
+                        GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        GetComponent<Image>().color = Color.white;
+                    }
+                }
+                break;
+            case GameManager.actionList.cleanWater:
+                if (GM.pollutedTiles <= 0)
+                {
+                    GetComponent<Image>().color = Color.gray;
+                }
+                else
+                {
+                    if (GM.curActionButton == this)
+                    {
+                        GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        GetComponent<Image>().color = Color.white;
+                    }
+                }
+                break;
+            case GameManager.actionList.recoverLand:
+                if (GM.scorchTiles <= 0)
+                {
+                    GetComponent<Image>().color = Color.gray;
+                }
+                else
+                {
+                    if (GM.curActionButton == this)
+                    {
+                        GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        GetComponent<Image>().color = Color.white;
+                    }
+                }
+                break;
+        }
+
     }
 
 
@@ -50,27 +111,9 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     //choose an action
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GM.gold >= moneyCost && GM.fireman >= peopleCost)
-        {
-            //fix following later (delete)
-            GM.curAction = thisAction;
-            GM.curfireManCost = peopleCost;
-            GM.curMoneyCost = moneyCost;
-            //update current action
-            if (GM.curActionButton != null)
-            {
-                GM.curActionButton.GetComponent<Image>().color = Color.white;
-            }
-            //highlight current action
-            GM.curActionButton = this;
-            GetComponent<Image>().color = Color.yellow;
+        //highlight current action
+        GM.curActionButton = this;
 
-
-        }
-        else
-        {
-            print("not enough");
-        }
     }
 
     

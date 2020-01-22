@@ -47,6 +47,22 @@ MonoBehaviour:
   gold: 0
   fireman: 0
   block: {fileID: 2927952245229918395, guid: d915eb62d4c35a8498755d572d995dbb, type: 3}
-  curAction: 0
+  brevicepNumber: 0
+  devilNumber: 0
+  dunnartNumer: 0
+  emuNumber: 0
+  gobyNumber: 0
+  koalaNumber: 0
+  platypusNumber: 0
+  quollNumber: 0
+  curActionButton: {fileID: 0}
   goldDisplay: {fileID: 0}
   fireManDisplay: {fileID: 0}
+  firingTiles: 0
+  scorchTiles: 0
+  pollutedTiles: 0
+  actionButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
