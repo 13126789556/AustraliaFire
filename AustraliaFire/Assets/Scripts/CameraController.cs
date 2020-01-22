@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     private float angleOffset = 45;
     Vector3 lastMousePos;
     private float minSize = 1f;
-    private float maxSize = 12f;
+    private float maxSize = 10f;
     private bool _running;
 
     private void Start()
