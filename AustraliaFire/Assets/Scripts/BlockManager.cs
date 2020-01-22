@@ -95,6 +95,15 @@ public class BlockManager : MonoBehaviour
                     gm.firingTiles--;
                 }
             }
+            else if (status == BlockStatus.Scorch)
+            {
+                //add a scorch material later
+                GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, scorchedLand };
+            }
+            else if (status == BlockStatus.Normal)
+            {
+                GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material};
+            }
         }
         else if(type == BlockType.Ocean)
         {
@@ -108,10 +117,7 @@ public class BlockManager : MonoBehaviour
             }
         }
 
-        if (status == BlockStatus.Scorch)
-        {
-
-        }
+        
         //animal
         if (hasAnimals && animalBurning)
         {
@@ -197,5 +203,24 @@ public class BlockManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void fightFire()
+    {
+        status = BlockManager.BlockStatus.Scorch;
+        GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand };
+        gm.scorchTiles++;
+        gm.firingTiles--;
+    }
+    public void oceanSave()
+    {
+        status = BlockManager.BlockStatus.Normal;
+        GetComponent<Renderer>().material = ocean;
+        gm.pollutedTiles--;
+    }
+    public void recoverLand()
+    {
+        status = BlockManager.BlockStatus.Normal;
+        GetComponent<Renderer>().materials[1] = null;
+        gm.scorchTiles--;
     }
 }
