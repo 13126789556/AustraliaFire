@@ -128,14 +128,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5699773886076310267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a216728caa7fbe941831b6fce227fd97, type: 3}
+  m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thisAction: 2
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 35
   peopleCoefficient: 1
   x: 1
   y: 1
@@ -344,14 +344,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5699773886281911456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a216728caa7fbe941831b6fce227fd97, type: 3}
+  m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thisAction: 3
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 70
   peopleCoefficient: 1
   x: 1
   y: 1
@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 5699773886696254607}
   - component: {fileID: 5699773886696254604}
   m_Layer: 5
-  m_Name: fire
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -937,15 +937,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5699773886925527496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a216728caa7fbe941831b6fce227fd97, type: 3}
+  m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thisAction: 1
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
-  peopleCoefficient: 1
+  moneyCoefficient: 16
+  peopleCoefficient: 3
   x: 1
   y: 1
 --- !u!1 &5699773887055669136
@@ -960,7 +960,7 @@ GameObject:
   - component: {fileID: 5699773887055668845}
   - component: {fileID: 5699773887055669138}
   m_Layer: 5
-  m_Name: recoverLand
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1107,7 +1107,7 @@ GameObject:
   - component: {fileID: 5699773887358538892}
   - component: {fileID: 5699773887358538893}
   m_Layer: 5
-  m_Name: saveAnimal
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,14 +1374,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5699773887544260879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a216728caa7fbe941831b6fce227fd97, type: 3}
+  m_Script: {fileID: 11500000, guid: 144b9be2e7d66034b96dbc99a160236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thisAction: 0
   description: {fileID: 5699773886627227268}
-  moneyCost: 0
-  peopleCost: 0
-  moneyCoefficient: 1
+  moneyCost: 500
+  peopleCost: 2
+  moneyCoefficient: 50
   peopleCoefficient: 1
   x: 1
   y: 1
@@ -1575,7 +1575,7 @@ GameObject:
   - component: {fileID: 5699773887709173010}
   - component: {fileID: 5699773887709173011}
   m_Layer: 5
-  m_Name: water
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

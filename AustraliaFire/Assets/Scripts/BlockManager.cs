@@ -77,8 +77,6 @@ public class BlockManager : MonoBehaviour
                     type = BlockType.Desert;
                     status = BlockStatus.Normal;
                     GetComponent<Renderer>().materials = new Material[1] { desert };
-                    //count firing tiles
-                    gm.countFire(this, -1);
                 }
             }
         }
@@ -128,9 +126,7 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
-                
             }
         }
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
@@ -138,7 +134,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -147,7 +142,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -156,7 +150,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -170,7 +163,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.y - 1 >= 0)
@@ -178,7 +170,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y - 1][coordinate.x - 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
@@ -188,7 +179,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.y + 1 < gm.grid.Count)
@@ -196,7 +186,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y + 1][coordinate.x + 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
@@ -206,7 +195,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
@@ -214,7 +202,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y - 1][coordinate.x + 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
@@ -224,7 +211,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.x - 1 >= 0)
@@ -232,7 +218,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
