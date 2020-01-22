@@ -12,6 +12,7 @@ public class BlockManager : MonoBehaviour
     public Material pollutedOcean;
     public Material shrub;
     public Material wood;
+    public Material scorchedLand;
     public enum BlockType { Desert, Forest, Grass, Ocean, Shrub, Wood }
     //[HideInInspector]
     public BlockType type = BlockType.Ocean;
@@ -127,9 +128,9 @@ public class BlockManager : MonoBehaviour
         if (coordinate.x - 1 >= 0)
         {
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
                 
             }
@@ -137,27 +138,27 @@ public class BlockManager : MonoBehaviour
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
         {
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
             }
         }
         if (coordinate.y - 1 >= 0)
         {
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
             }
         }
         if (coordinate.y + 1 < gm.grid.Count)
         {
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -219,22 +220,24 @@ public class BlockManager : MonoBehaviour
                     bm.status = BlockStatus.Polluted;
                 }
             }
-        }
-        if (coordinate.y + 1 < gm.grid.Count)
-        {
-            bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
+            if (status == BlockStatus.Scorch)
             {
-                gm.countOceanPollute(bm);
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.x - 1 >= 0)
-            {
-                bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+                //add a scorch material later
+                GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
+                bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
                     gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
+                }
+                if (coordinate.x - 1 >= 0)
+                {
+                    bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+                    if (bm.type == BlockType.Ocean)
+                    {
+                        gm.countOceanPollute(bm);
+                        bm.status = BlockStatus.Polluted;
+                    }
                 }
             }
         }

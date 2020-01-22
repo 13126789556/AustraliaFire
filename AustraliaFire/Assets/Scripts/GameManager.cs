@@ -85,8 +85,8 @@ public class GameManager : MonoBehaviour
         gold = 10000;
         time = 0;
         fireman = 1000;
+       
         GenarateMap();
-
         //update resource display at the beginning
         updateResourceDisplay();
         curActionButton = null;
@@ -101,23 +101,28 @@ public class GameManager : MonoBehaviour
             int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
             BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
             //set a random block to fire
-            if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
+            if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Scorch && BM.status != BlockManager.BlockStatus.Fire)
             {
                 //count the number of firing tiles
-                countFire(BM,1);
+                firingTiles++;
                 //set fire on the tile
                 BM.status = BlockManager.BlockStatus.Fire;
-                
             }
+            //----------< LZ
+
+            //grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
             if (Random.Range(0, 2) > 1)
             {
                 // LZ -->>>>>   count the number of firing tiles
                 randomX = Random.Range(0, grid.Count);
                 randomY = Random.Range(0, grid[0].Count);
                 BM = grid[randomX][randomY].GetComponent<BlockManager>();
-                countFire(BM,1);
                 //----------< LZ
-                grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+                if (BM.status != BlockManager.BlockStatus.Scorch && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
+                {
+                    firingTiles++;
+                    grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+                }
             }
             time = 0;
         }
@@ -221,9 +226,10 @@ public class GameManager : MonoBehaviour
                         print("picked fight fire");
                         //change the following later
                         BM.status = BlockManager.BlockStatus.Scorch;
+                        scorchTiles++;
                         reduceResource();
                         //count the number of firing tiles
-                        countFire(BM, -1);
+                        firingTiles--;
                     }
                 }
                 else if (BM.status == BlockManager.BlockStatus.Polluted && curActionButton.thisAction == GameManager.actionList.cleanWater && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
@@ -280,18 +286,6 @@ public class GameManager : MonoBehaviour
             
             
         }
-    }
-    public void countFire(BlockManager BM, int add)
-    {
-        if (add >0 && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
-        {
-            firingTiles++;
-        }
-        else if (add < 0)
-        {
-            firingTiles--;
-        }
-        print("firing tiles:" + firingTiles);
     }
     public void countOceanPollute(BlockManager BM)
     {
