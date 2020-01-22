@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 1.5f)
+        if (time >= 2)
         {
             // LZ -->>>>>  count the number of firing tiles
             int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
@@ -88,11 +88,7 @@ public class GameManager : MonoBehaviour
             }
             //----------< LZ
 
-            //set a random block to fire
-            if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
-            {
-                BM.status = BlockManager.BlockStatus.Fire;
-            }
+            grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
             if (Random.Range(0, 2) > 1)
             {
                 // LZ -->>>>>   count the number of firing tiles

@@ -9,7 +9,6 @@ public class BlockManager : MonoBehaviour
     public Material forest;
     public Material grass;
     public Material ocean;
-    public Material pollutedOcean;
     public Material shrub;
     public Material wood;
     public enum BlockType { Desert, Forest, Grass, Ocean, Shrub, Wood }
@@ -57,170 +56,161 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (type == BlockType.Forest || type == BlockType.Grass || type == BlockType.Shrub || type == BlockType.Wood)
+        switch (type)
         {
-            if (status == BlockStatus.Fire)
-            {
-                //if on fire, display fire material
-                GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
-                fireTimer -= Time.deltaTime;
-                //nearby ocean block will be polluted immediately
-                OceanPollute();
-                //after few seconds, fire extends
-                if (fireTimer <= 8 && !fireExtended)
+            case BlockType.Desert:
+                if (status == BlockStatus.Fire)
                 {
-                    FireExtend();
+                    status = BlockStatus.Normal;
                 }
-                //after few seconds, become desert
-                if (fireTimer <= 0)
+                    break;
+            case BlockType.Forest:
+                if (status == BlockStatus.Fire)
                 {
-                    type = BlockType.Desert;
-                    status = BlockStatus.Normal;
-                    GetComponent<Renderer>().materials = new Material[1] { desert };
+                    //if on fire, display fire material
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire};
+                    fireTimer -= Time.deltaTime;
+                    //after 5s, fire extends
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    //after 10s, become desert
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
                 }
-            }
-        }
-        else if(type == BlockType.Ocean)
-        {
-            switch (status)
-            {
-                case BlockStatus.Normal:
-                    if (GetComponent<Renderer>().material != ocean)
-                    {
-                        GetComponent<Renderer>().material = ocean;
-                    }
-                    break;
-                case BlockStatus.Polluted:
-                    if (GetComponent<Renderer>().material != pollutedOcean)
-                    {
-                        GetComponent<Renderer>().material = pollutedOcean;
-                    }
-                    break;
-                default:
-                    status = BlockStatus.Normal;
-                    break;
-            }
-        }
-        else if(type == BlockType.Desert)
-        {
-            if(status != BlockStatus.Normal)
-            {
-                status = BlockStatus.Normal;
-            }
-        }
 
+                break;
+            case BlockType.Grass:
+                if (status == BlockStatus.Fire)
+                {
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
+                }
+                break;
+            case BlockType.Ocean:
+                if (status == BlockStatus.Fire)
+                {
+                    status = BlockStatus.Normal;
+                }
+                break;
+            case BlockType.Shrub:
+                if (status == BlockStatus.Fire)
+                {
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
+                }
+                break;
+            case BlockType.Wood:
+                if (status == BlockStatus.Fire)
+                {
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 5 && !fireExtended)
+                    {
+                        fireExtended = true;
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
+                        {
+                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
+                        {
+                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        }
+                    }
+                    if (fireTimer <= 0)
+                    {
+                        type = BlockType.Desert;
+                        status = BlockStatus.Normal;
+                        GetComponent<Renderer>().materials = new Material[1] { desert };
+                    }
+                }
+                break;
+        }
         if (status == BlockStatus.Scorch)
         {
             //add a scorch material later
             GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
-        }
-    }
-
-    private void FireExtend()
-    {
-        fireExtended = true;
-        BlockManager bm;
-        //check up, down, left, right 4 blocks
-        if (coordinate.x - 1 >= 0)
-        {
-            bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
-            {
-                bm.status = BlockStatus.Fire;
-            }
-        }
-        if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
-        {
-            bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
-            {
-                bm.status = BlockStatus.Fire;
-            }
-        }
-        if (coordinate.y - 1 >= 0)
-        {
-            bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
-            {
-                bm.status = BlockStatus.Fire;
-            }
-        }
-        if (coordinate.y + 1 < gm.grid.Count)
-        {
-            bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
-            {
-                bm.status = BlockStatus.Fire;
-            }
-        }
-    }
-    private void OceanPollute()
-    {
-        BlockManager bm;
-        //check nearby 8 blocks
-        if (coordinate.x - 1 >= 0)
-        {
-            bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.y - 1 >= 0)
-            {
-                bm = gm.grid[coordinate.y - 1][coordinate.x - 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
-        }
-        if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
-        {
-            bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.y + 1 < gm.grid.Count)
-            {
-                bm = gm.grid[coordinate.y + 1][coordinate.x + 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
-        }
-        if (coordinate.y - 1 >= 0)
-        {
-            bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
-            {
-                bm = gm.grid[coordinate.y - 1][coordinate.x + 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
-        }
-        if (coordinate.y + 1 < gm.grid.Count)
-        {
-            bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.x - 1 >= 0)
-            {
-                bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
         }
     }
 }
