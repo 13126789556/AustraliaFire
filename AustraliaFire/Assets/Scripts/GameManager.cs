@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
             //set a random block to fire
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Scorch && BM.status != BlockManager.BlockStatus.Fire)
             {
-                BM.setFire(BM);
+                BM.setFire();
             }
             //----------< LZ
 
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
                 //----------< LZ
                 if (BM.status != BlockManager.BlockStatus.Scorch && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
                 {
-                    BM.setFire(BM);
+                    BM.setFire();
                 }
             }
             time = 0;
@@ -152,10 +152,10 @@ public class GameManager : MonoBehaviour
         platypusData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
         rawData = Resources.Load<TextAsset>("QuollData").ToString();
         quollData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
-        for (int r = 0; r < mapData.Length - 1; r++)    //instantiate into grid
+        for (int r = 0; r < mapData.Length; ++r)    //instantiate into grid
         {
             grid.Add(new List<GameObject>());
-            for (int c = 0; c< mapData[r].Length - 1; c++)
+            for (int c = 0; c< mapData[r].Length - 1; ++c)
             {
                 grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
                 var bm = grid[r].Last().GetComponent<BlockManager>();

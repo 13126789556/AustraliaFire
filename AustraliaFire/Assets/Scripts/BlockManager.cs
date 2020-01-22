@@ -83,6 +83,7 @@ public class BlockManager : MonoBehaviour
                 if (fireTimer <= 8 && !fireExtended)
                 {
                     FireExtend();
+                    fireExtended = true;
                 }
                 //after few seconds, become desert
                 if (fireTimer <= 0)
@@ -126,52 +127,50 @@ public class BlockManager : MonoBehaviour
 
     private void FireExtend()
     {
-        fireExtended = true;
         BlockManager bm;
         //check up, down, left, right 4 blocks
         if (coordinate.x - 1 >= 0)
         {
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
             {
-                setFire(bm);
-
+                bm.setFire();
             }
         }
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
         {
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
             {
-                setFire(bm);
+                bm.setFire();
             }
         }
         if (coordinate.y - 1 >= 0)
         {
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
             {
-                setFire(bm);
+                bm.setFire();
             }
         }
         if (coordinate.y + 1 < gm.grid.Count)
         {
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
             {
-                setFire(bm);
+                bm.setFire();
             }
         }
     }
-    public void setFire(BlockManager bm)
+    public void setFire()
     {
-        bm.hasAnimals = true;
+        hasAnimals = true;
         gm.firingTiles++;
-        if (bm.hasAnimals)
+        if (hasAnimals)
         {
-            bm.animalBurning = true;
+            animalBurning = true;
         }
-        bm.status = BlockStatus.Fire;
+        status = BlockStatus.Fire;
         //test
         
     }
