@@ -49,7 +49,7 @@ MonoBehaviour:
   block: {fileID: 2927952245229918395, guid: d915eb62d4c35a8498755d572d995dbb, type: 3}
   brevicepNumber: 0
   devilNumber: 0
-  dunnartNumer: 0
+  dunnartNubmer: 0
   emuNumber: 0
   gobyNumber: 0
   koalaNumber: 0
@@ -66,3 +66,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  x: 1
+  y: 1
+  costDescription: {fileID: 0}
