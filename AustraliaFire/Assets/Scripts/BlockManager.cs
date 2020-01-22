@@ -69,6 +69,7 @@ public class BlockManager : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
@@ -82,6 +83,8 @@ public class BlockManager : MonoBehaviour
                     //count firing tiles
                     gm.countFire(this, -1);
 >>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
+=======
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
                 }
                     break;
             case BlockType.Forest:
@@ -236,9 +239,7 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
-                
             }
         }
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
@@ -246,7 +247,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -255,7 +255,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -264,7 +263,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
             {
-                gm.countFire(bm,1);
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -278,7 +276,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.y - 1 >= 0)
@@ -286,7 +283,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y - 1][coordinate.x - 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
@@ -296,7 +292,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.y + 1 < gm.grid.Count)
@@ -304,7 +299,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y + 1][coordinate.x + 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
@@ -314,7 +308,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
@@ -322,7 +315,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y - 1][coordinate.x + 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
                 }
@@ -337,7 +329,6 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
             if (bm.type == BlockType.Ocean)
             {
-                gm.countOceanPollute(bm);
                 bm.status = BlockStatus.Polluted;
             }
             if (coordinate.x - 1 >= 0)
@@ -345,7 +336,6 @@ public class BlockManager : MonoBehaviour
                 bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
-                    gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
             }
