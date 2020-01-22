@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //singleton of game manager
     public static GameManager _instance;
     public static GameManager Instance
     {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     //public GameObject valueUI;
     //public GameObject optionUI;
     //public GameObject ;
+    public int brevicepNumber, devilNumber, dunnartNumer, emuNumber, gobyNumber, koalaNumber, platypusNumber, quollNumber;
 
     private char[][] mapData;
     private GameObject map;
@@ -58,6 +60,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        brevicepNumber = 10000;
+        devilNumber = 7000;
+        dunnartNumer = 100000;
+        emuNumber = 600000;
+        gobyNumber = 2000;
+        koalaNumber = 100000;
+        platypusNumber = 30000; 
+        quollNumber = 10000;
         grid = new List<List<GameObject>>();
         GameObject tempGO = new GameObject("Map");
         map = tempGO;
