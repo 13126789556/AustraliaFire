@@ -239,6 +239,7 @@ public class GameManager : MonoBehaviour
                         print("picked clean water");
                         //change the following later
                         BM.status = BlockManager.BlockStatus.Normal;
+                        BM.GetComponent<Renderer>().material = BM.ocean;
                         //count the number of firing tiles
                         pollutedTiles--;
                         reduceResource();

@@ -80,7 +80,7 @@ public class BlockManager : MonoBehaviour
                     status = BlockStatus.Normal;
                     GetComponent<Renderer>().materials = new Material[1] { desert };
                     //count firing tiles
-                    gm.countFire(this, -1);
+                    gm.firingTiles--;
                 }
             }
         }
@@ -167,79 +167,98 @@ public class BlockManager : MonoBehaviour
     {
         BlockManager bm;
         //check nearby 8 blocks
-        if (coordinate.x - 1 >= 0)
+        for (int dx = -1; dx <= 1; dx++)
         {
-            bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
+            for (int dy = -1; dy <= 1; dy++)
             {
-                gm.countOceanPollute(bm);
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.y - 1 >= 0)
-            {
-                bm = gm.grid[coordinate.y - 1][coordinate.x - 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
+                if (coordinate.x + dx >= 0 
+                    && coordinate.x + dx <= gm.grid[coordinate.y].Count 
+                    && coordinate.y + dy >= 0 
+                    && coordinate.y + dy < gm.grid.Count)
                 {
-                    gm.countOceanPollute(bm);
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
-        }
-        if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
-        {
-            bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                gm.countOceanPollute(bm);
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.y + 1 < gm.grid.Count)
-            {
-                bm = gm.grid[coordinate.y + 1][coordinate.x + 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    gm.countOceanPollute(bm);
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
-        }
-        if (coordinate.y - 1 >= 0)
-        {
-            bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                gm.countOceanPollute(bm);
-                bm.status = BlockStatus.Polluted;
-            }
-            if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
-            {
-                bm = gm.grid[coordinate.y - 1][coordinate.x + 1].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    gm.countOceanPollute(bm);
-                    bm.status = BlockStatus.Polluted;
-                }
-            }
-            if (status == BlockStatus.Scorch)
-            {
-                //add a scorch material later
-                GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
-                bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-                if (bm.type == BlockType.Ocean)
-                {
-                    gm.countOceanPollute(bm);
-                    bm.status = BlockStatus.Polluted;
-                }
-                if (coordinate.x - 1 >= 0)
-                {
-                    bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+                    bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
                     if (bm.type == BlockType.Ocean)
                     {
                         gm.countOceanPollute(bm);
                         bm.status = BlockStatus.Polluted;
+                        bm.GetComponent<Renderer>().material = pollutedOcean;
                     }
                 }
             }
         }
+        //if (coordinate.x - 1 >= 0)
+        //{
+        //    bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
+        //    if (bm.type == BlockType.Ocean)
+        //    {
+        //        gm.countOceanPollute(bm);
+        //        bm.status = BlockStatus.Polluted;
+        //    }
+        //    if (coordinate.y - 1 >= 0)
+        //    {
+        //        bm = gm.grid[coordinate.y - 1][coordinate.x - 1].GetComponent<BlockManager>();
+        //        if (bm.type == BlockType.Ocean)
+        //        {
+        //            gm.countOceanPollute(bm);
+        //            bm.status = BlockStatus.Polluted;
+        //        }
+        //    }
+        //}
+        //if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
+        //{
+        //    bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
+        //    if (bm.type == BlockType.Ocean)
+        //    {
+        //        gm.countOceanPollute(bm);
+        //        bm.status = BlockStatus.Polluted;
+        //    }
+        //    if (coordinate.y + 1 < gm.grid.Count)
+        //    {
+        //        bm = gm.grid[coordinate.y + 1][coordinate.x + 1].GetComponent<BlockManager>();
+        //        if (bm.type == BlockType.Ocean)
+        //        {
+        //            gm.countOceanPollute(bm);
+        //            bm.status = BlockStatus.Polluted;
+        //        }
+        //    }
+        //}
+        //if (coordinate.y - 1 >= 0)
+        //{
+        //    bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
+        //    if (bm.type == BlockType.Ocean)
+        //    {
+        //        gm.countOceanPollute(bm);
+        //        bm.status = BlockStatus.Polluted;
+        //    }
+        //    if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
+        //    {
+        //        bm = gm.grid[coordinate.y - 1][coordinate.x + 1].GetComponent<BlockManager>();
+        //        if (bm.type == BlockType.Ocean)
+        //        {
+        //            gm.countOceanPollute(bm);
+        //            bm.status = BlockStatus.Polluted;
+        //        }
+        //    }
+        //    if (status == BlockStatus.Scorch)
+        //    {
+        //        //add a scorch material later
+        //        GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
+        //        bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
+        //        if (bm.type == BlockType.Ocean)
+        //        {
+        //            gm.countOceanPollute(bm);
+        //            bm.status = BlockStatus.Polluted;
+        //        }
+        //        if (coordinate.x - 1 >= 0)
+        //        {
+        //            bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+        //            if (bm.type == BlockType.Ocean)
+        //            {
+        //                gm.countOceanPollute(bm);
+        //                bm.status = BlockStatus.Polluted;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
