@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
         gold = 10000;
         time = 0;
         fireman = 1000;
+       
         GenarateMap();
-
         //update resource display at the beginning
         updateResourceDisplay();
         curActionButton = null;
@@ -82,43 +82,6 @@ public class GameManager : MonoBehaviour
         {
             int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
             BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            {
-                firingTiles++;
-                print("firing tiles:" + firingTiles);
-=======
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
-            if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-            {
-                firingTiles++;
-                print("firing tiles:" + firingTiles);
-            }
-            //----------< LZ
-
-<<<<<<< HEAD
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
             //set a random block to fire
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Scorch && BM.status != BlockManager.BlockStatus.Fire)
             {
@@ -129,7 +92,7 @@ public class GameManager : MonoBehaviour
             }
             //----------< LZ
 
-            grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+            //grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
             if (Random.Range(0, 2) > 1)
             {
                 // LZ -->>>>>   count the number of firing tiles

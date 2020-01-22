@@ -63,31 +63,16 @@ public class BlockManager : MonoBehaviour
                 if (status == BlockStatus.Fire)
                 {
                     status = BlockStatus.Normal;
-<<<<<<< HEAD
-=======
                     GetComponent<Renderer>().materials = new Material[1] { desert };
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
                     //count firing tiles
                     gm.firingTiles--;
                 }
-                    break;
+                break;
             case BlockType.Forest:
                 if (status == BlockStatus.Fire)
                 {
                     //if on fire, display fire material
-                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire};
+                    GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, fire };
                     fireTimer -= Time.deltaTime;
                     //after 5s, fire extends
                     if (fireTimer <= 5 && !fireExtended)
@@ -95,19 +80,45 @@ public class BlockManager : MonoBehaviour
                         fireExtended = true;
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x-1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
+                            
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y-1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y+1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                     }
                     //after 10s, become desert
@@ -118,8 +129,6 @@ public class BlockManager : MonoBehaviour
                         GetComponent<Renderer>().materials = new Material[1] { desert };
                     }
                 }
-
-<<<<<<< HEAD
                 break;
             case BlockType.Grass:
                 if (status == BlockStatus.Fire)
@@ -131,19 +140,43 @@ public class BlockManager : MonoBehaviour
                         fireExtended = true;
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x-1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x+1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                     }
                     if (fireTimer <= 0)
@@ -170,19 +203,43 @@ public class BlockManager : MonoBehaviour
                         fireExtended = true;
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x-1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x+1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                     }
                     if (fireTimer <= 0)
@@ -203,19 +260,43 @@ public class BlockManager : MonoBehaviour
                         fireExtended = true;
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x - 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y][coordinate.x + 1] != null)
                         {
-                            gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
-                        {
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
-                            gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                        {
+                            //gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
                         {
-                            gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            //gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
+                            BlockManager bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
+                            if (bm.status == BlockManager.BlockStatus.Normal)
+                            {
+                                gm.firingTiles++;
+                                bm.status = BlockStatus.Fire;
+                            }
                         }
                     }
                     if (fireTimer <= 0)
@@ -224,15 +305,18 @@ public class BlockManager : MonoBehaviour
                         status = BlockStatus.Normal;
                         GetComponent<Renderer>().materials = new Material[1] { desert };
                     }
-=======
+                }
+                break;
+        }
         if (status == BlockStatus.Scorch)
         {
-            GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material,scorchedLand };
+            GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, scorchedLand };
         }
         else if (status == BlockStatus.Normal)
         {
-            GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material};
+            GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
         }
+
     }
 
     private void FireExtend()
@@ -333,33 +417,28 @@ public class BlockManager : MonoBehaviour
                 {
                     gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
                 }
-                break;
-        }
-        if (status == BlockStatus.Scorch)
-        {
-<<<<<<< HEAD
-            //add a scorch material later
-            GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
-=======
-            bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (bm.type == BlockType.Ocean)
-            {
-                gm.countOceanPollute(bm);
-                bm.status = BlockStatus.Polluted;
             }
-            if (coordinate.x - 1 >= 0)
+            if (status == BlockStatus.Scorch)
             {
-                bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+                //add a scorch material later
+                GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
+                bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
                 if (bm.type == BlockType.Ocean)
                 {
                     gm.countOceanPollute(bm);
                     bm.status = BlockStatus.Polluted;
                 }
+                if (coordinate.x - 1 >= 0)
+                {
+                    bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+                    if (bm.type == BlockType.Ocean)
+                    {
+                        gm.countOceanPollute(bm);
+                        bm.status = BlockStatus.Polluted;
+                    }
+                }
             }
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
         }
     }
-
 }
