@@ -226,6 +226,7 @@ public class GameManager : MonoBehaviour
                         print("picked fight fire");
                         //change the following later
                         BM.status = BlockManager.BlockStatus.Scorch;
+                        BM.GetComponent<Renderer>().materials = new Material[] { BM.GetComponent<Renderer>().materials[0], BM.scorchedLand };
                         scorchTiles++;
                         reduceResource();
                         //count the number of firing tiles
@@ -252,6 +253,7 @@ public class GameManager : MonoBehaviour
                         print("picked recover land");
                         //change the following later
                         BM.status = BlockManager.BlockStatus.Normal;
+                        BM.GetComponent<Renderer>().materials[1] = null;
                         //count the number of firing tiles
                         scorchTiles--;
                         reduceResource();

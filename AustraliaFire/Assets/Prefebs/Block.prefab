@@ -115,10 +115,18 @@ MonoBehaviour:
   pollutedOcean: {fileID: 2100000, guid: 3ffbcd18955b26d4882897d100baad61, type: 2}
   shrub: {fileID: 2100000, guid: 3f918e7a7405f234991d259d5a6560f6, type: 2}
   wood: {fileID: 2100000, guid: 280069e11fa7ea4448b0d1f8fd84802f, type: 2}
-  scorchedLand: {fileID: 2100000, guid: 47679e0f433c4f948a0e0aedbab4d1ae, type: 2}
+  scorchedLand: {fileID: 2100000, guid: 51c609f924de0224fb1c3f812df0023e, type: 2}
   type: 0
   status: 0
   hasAnimals: 0
+  hasBrevicep: 0
+  hasDevil: 0
+  hasDunnart: 0
+  hasEmu: 0
+  hasGoby: 0
+  hasKoala: 0
+  hasPlatypus: 0
+  hasQuoll: 0
   coordinate: {x: 0, y: 0}
   gm: {fileID: 0}
 --- !u!65 &3994999186681899621
