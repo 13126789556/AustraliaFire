@@ -4,11 +4,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private float speed = 0.007f;
-    private float angleOffset = 45;
     Vector3 lastMousePos;
     private float minSize = 1f;
-    private float maxSize = 12f;
-    private bool _running;
+    private float maxSize = 10f;
 
     private void Start()
     {

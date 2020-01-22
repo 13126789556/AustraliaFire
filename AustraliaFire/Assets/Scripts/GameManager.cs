@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //singleton of game manager
     public static GameManager _instance;
     public static GameManager Instance
     {
@@ -29,8 +30,17 @@ public class GameManager : MonoBehaviour
     //public GameObject valueUI;
     //public GameObject optionUI;
     //public GameObject ;
+    public int brevicepNumber, devilNumber, dunnartNubmer, emuNumber, gobyNumber, koalaNumber, platypusNumber, quollNumber;
 
     private char[][] mapData;
+    private char[][] brevicepData;
+    private char[][] devilData;
+    private char[][] dunnartData;
+    private char[][] emuData;
+    private char[][] gobyData;
+    private char[][] koalaData;
+    private char[][] platypusData;
+    private char[][] quollData;
     private GameObject map;
     [HideInInspector]
     public List<List<GameObject>> grid;
@@ -60,6 +70,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        brevicepNumber = 10000;
+        devilNumber = 7000;
+        dunnartNubmer = 100000;
+        emuNumber = 600000;
+        gobyNumber = 2000;
+        koalaNumber = 100000;
+        platypusNumber = 30000; 
+        quollNumber = 10000;
         grid = new List<List<GameObject>>();
         GameObject tempGO = new GameObject("Map");
         map = tempGO;
@@ -78,47 +96,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 2)
+        if (time >= 1.5f)
         {
             int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
             BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            {
-                firingTiles++;
-                print("firing tiles:" + firingTiles);
-=======
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
-            if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-            {
-                firingTiles++;
-                print("firing tiles:" + firingTiles);
-            }
-            //----------< LZ
-
-<<<<<<< HEAD
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
             //set a random block to fire
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
             {
@@ -126,36 +107,8 @@ public class GameManager : MonoBehaviour
                 countFire(BM,1);
                 //set fire on the tile
                 BM.status = BlockManager.BlockStatus.Fire;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
                 
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
-                
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
-                
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
-                
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
             }
-            //----------< LZ
-
-            grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
             if (Random.Range(0, 2) > 1)
             {
                 // LZ -->>>>>   count the number of firing tiles
@@ -176,58 +129,69 @@ public class GameManager : MonoBehaviour
 
     void GenarateMap()
     {
-        var rawMapData = Resources.Load<TextAsset>("MapData").ToString();
-        mapData  = rawMapData.Split('\n').Select(c => c.ToCharArray()).ToArray();
-        for (int r = 0; r < mapData.Length; r++)    //instantiate into grid
+        var rawData = Resources.Load<TextAsset>("MapData").ToString();
+        mapData  = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("BrevicepsData").ToString();
+        brevicepData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("DevilData").ToString();
+        devilData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("DunnartData").ToString();
+        dunnartData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("EmuData").ToString();
+        emuData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("GobyData").ToString();
+        gobyData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("KoalaData").ToString();
+        koalaData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("PlatypusData").ToString();
+        platypusData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        rawData = Resources.Load<TextAsset>("QuollData").ToString();
+        quollData = rawData.Split('\n').Select(c => c.ToCharArray()).ToArray();
+        for (int r = 0; r < mapData.Length - 1; r++)    //instantiate into grid
         {
             grid.Add(new List<GameObject>());
-            for (int c = 0; c< mapData[r].Length; c++)
+            for (int c = 0; c< mapData[r].Length - 1; c++)
             {
-                switch (mapData[r][c])
+                grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
+                var bm = grid[r].Last().GetComponent<BlockManager>();
+                grid[r].Last().transform.SetParent(map.transform);
+                bm.coordinate = new Vector2Int(c, r); 
+                switch (mapData[r][c])  //block type
                 {
                     //desert
-                    case 'd': 
-                        grid.Last().Add((GameObject) Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
-                        grid[r].Last().transform.SetParent(map.transform);
-                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Desert;
-                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
+                    case 'd':
+                        bm.type = BlockManager.BlockType.Desert;
                         break;
                     //forest
                     case 'f':
-                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
-                        grid[r].Last().transform.SetParent(map.transform);
-                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Forest;
-                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
+                        bm.type = BlockManager.BlockType.Forest;
                         break;
                     //grass
                     case 'g':
-                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
-                        grid[r].Last().transform.SetParent(map.transform);
-                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Grass;
-                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
+                        bm.type = BlockManager.BlockType.Grass;
                         break;
                     //ocean
                     case 'o':
-                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
-                        grid[r].Last().transform.SetParent(map.transform);
-                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Ocean;
-                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
+                        bm.type = BlockManager.BlockType.Ocean;
                         break;
                     //shrub
                     case 's':
-                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
-                        grid[r].Last().transform.SetParent(map.transform);
-                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Shrub;
-                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
+                        bm.type = BlockManager.BlockType.Shrub;
                         break;
                     //wood
                     case 'w':
-                        grid.Last().Add((GameObject)Instantiate(block, new Vector3(c - mapData[r].Length / 2, mapData.Length / 2 - r, 0), new Quaternion(0, 0, 0, 1)));
-                        grid[r].Last().transform.SetParent(map.transform);
-                        grid[r].Last().GetComponent<BlockManager>().type = BlockManager.BlockType.Wood;
-                        grid[r].Last().GetComponent<BlockManager>().coordinate = new Vector2Int(c, r);
+                        bm.type = BlockManager.BlockType.Wood;
                         break;
                 }
+                //animal species
+                bm.hasBrevicep = brevicepData[r][c] == '1' ? true : false;
+                bm.hasDevil = devilData[r][c] == '1' ? true : false;
+                bm.hasDunnart = dunnartData[r][c] == '1' ? true : false;
+                bm.hasEmu = emuData[r][c] == '1' ? true : false;
+                bm.hasGoby = gobyData[r][c] == '1' ? true : false;
+                bm.hasKoala = koalaData[r][c] == '1' ? true : false;
+                bm.hasPlatypus = platypusData[r][c] == '1' ? true : false;
+                bm.hasQuoll = quollData[r][c] == '1' ? true : false;
             }
         }
     }

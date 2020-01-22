@@ -112,12 +112,14 @@ MonoBehaviour:
   forest: {fileID: 2100000, guid: 6fecb1d7a260680488188f7d065f7b50, type: 2}
   grass: {fileID: 2100000, guid: 710068367f7aec14b936a0f8b67e8f09, type: 2}
   ocean: {fileID: 2100000, guid: e2cc7eb7913254746ac28b867bca688d, type: 2}
+  pollutedOcean: {fileID: 2100000, guid: 3ffbcd18955b26d4882897d100baad61, type: 2}
   shrub: {fileID: 2100000, guid: 3f918e7a7405f234991d259d5a6560f6, type: 2}
   wood: {fileID: 2100000, guid: 280069e11fa7ea4448b0d1f8fd84802f, type: 2}
   type: 0
   status: 0
   hasAnimals: 0
   coordinate: {x: 0, y: 0}
+  gm: {fileID: 0}
 --- !u!65 &3994999186681899621
 BoxCollider:
   m_ObjectHideFlags: 0
