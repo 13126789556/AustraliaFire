@@ -62,6 +62,10 @@ public class BlockManager : MonoBehaviour
                 if (status == BlockStatus.Fire)
                 {
                     status = BlockStatus.Normal;
+<<<<<<< HEAD
+=======
+                    GetComponent<Renderer>().materials = new Material[1] { desert };
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
                 }
                     break;
             case BlockType.Forest:
@@ -100,6 +104,7 @@ public class BlockManager : MonoBehaviour
                     }
                 }
 
+<<<<<<< HEAD
                 break;
             case BlockType.Grass:
                 if (status == BlockStatus.Fire)
@@ -204,13 +209,118 @@ public class BlockManager : MonoBehaviour
                         status = BlockStatus.Normal;
                         GetComponent<Renderer>().materials = new Material[1] { desert };
                     }
+=======
+    private void FireExtend()
+    {
+        fireExtended = true;
+        BlockManager bm;
+        //check up, down, left, right 4 blocks
+        if (coordinate.x - 1 >= 0)
+        {
+            bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            {
+                bm.status = BlockStatus.Fire;
+            }
+        }
+        if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
+        {
+            bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            {
+                bm.status = BlockStatus.Fire;
+            }
+        }
+        if (coordinate.y - 1 >= 0)
+        {
+            bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            {
+                bm.status = BlockStatus.Fire;
+            }
+        }
+        if (coordinate.y + 1 < gm.grid.Count)
+        {
+            bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            {
+                bm.status = BlockStatus.Fire;
+            }
+        }
+    }
+    private void OceanPollute()
+    {
+        BlockManager bm;
+        //check nearby 8 blocks
+        if (coordinate.x - 1 >= 0)
+        {
+            bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
+            if (bm.type == BlockType.Ocean)
+            {
+                bm.status = BlockStatus.Polluted;
+            }
+            if (coordinate.y - 1 >= 0)
+            {
+                bm = gm.grid[coordinate.y - 1][coordinate.x - 1].GetComponent<BlockManager>();
+                if (bm.type == BlockType.Ocean)
+                {
+                    bm.status = BlockStatus.Polluted;
+                }
+            }
+        }
+        if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
+        {
+            bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
+            if (bm.type == BlockType.Ocean)
+            {
+                bm.status = BlockStatus.Polluted;
+            }
+            if (coordinate.y + 1 < gm.grid.Count)
+            {
+                bm = gm.grid[coordinate.y + 1][coordinate.x + 1].GetComponent<BlockManager>();
+                if (bm.type == BlockType.Ocean)
+                {
+                    bm.status = BlockStatus.Polluted;
+                }
+            }
+        }
+        if (coordinate.y - 1 >= 0)
+        {
+            bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
+            if (bm.type == BlockType.Ocean)
+            {
+                bm.status = BlockStatus.Polluted;
+            }
+            if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
+            {
+                bm = gm.grid[coordinate.y - 1][coordinate.x + 1].GetComponent<BlockManager>();
+                if (bm.type == BlockType.Ocean)
+                {
+                    bm.status = BlockStatus.Polluted;
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
                 }
                 break;
         }
         if (status == BlockStatus.Scorch)
         {
+<<<<<<< HEAD
             //add a scorch material later
             GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material };
+=======
+            bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
+            if (bm.type == BlockType.Ocean)
+            {
+                bm.status = BlockStatus.Polluted;
+            }
+            if (coordinate.x - 1 >= 0)
+            {
+                bm = gm.grid[coordinate.y + 1][coordinate.x - 1].GetComponent<BlockManager>();
+                if (bm.type == BlockType.Ocean)
+                {
+                    bm.status = BlockStatus.Polluted;
+                }
+            }
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
         }
     }
 }

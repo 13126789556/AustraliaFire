@@ -82,9 +82,22 @@ public class GameManager : MonoBehaviour
             int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
             BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
             if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
+<<<<<<< HEAD
             {
                 firingTiles++;
                 print("firing tiles:" + firingTiles);
+=======
+            {
+                firingTiles++;
+                print("firing tiles:" + firingTiles);
+            }
+            //----------< LZ
+
+            //set a random block to fire
+            if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
+            {
+                BM.status = BlockManager.BlockStatus.Fire;
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
             }
             //----------< LZ
 
