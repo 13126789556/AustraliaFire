@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -116,6 +117,8 @@ public class GameManager : MonoBehaviour
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
+=======
+>>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
             //set a random block to fire
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
             {
@@ -129,6 +132,7 @@ public class GameManager : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
@@ -142,6 +146,9 @@ public class GameManager : MonoBehaviour
 >>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
+=======
+                
+>>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
 =======
                 
 >>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
