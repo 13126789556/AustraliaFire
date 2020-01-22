@@ -84,10 +84,13 @@ public class GameManager : MonoBehaviour
             if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {
                 firingTiles++;
                 print("firing tiles:" + firingTiles);
 =======
+=======
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
             {
@@ -101,6 +104,9 @@ public class GameManager : MonoBehaviour
             {
                 BM.status = BlockManager.BlockStatus.Fire;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
+=======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
