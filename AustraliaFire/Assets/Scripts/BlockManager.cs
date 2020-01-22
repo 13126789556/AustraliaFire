@@ -68,11 +68,16 @@ public class BlockManager : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
+=======
+                    //count firing tiles
+                    gm.countFire(this, -1);
+>>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
 =======
                     //count firing tiles
                     gm.countFire(this, -1);
