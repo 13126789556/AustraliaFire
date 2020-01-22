@@ -11,6 +11,7 @@ public class BlockManager : MonoBehaviour
     public Material ocean;
     public Material shrub;
     public Material wood;
+    public Material scorchedLand;
     public enum BlockType { Desert, Forest, Grass, Ocean, Shrub, Wood }
     //[HideInInspector]
     public BlockType type = BlockType.Ocean;
@@ -79,22 +80,7 @@ public class BlockManager : MonoBehaviour
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
 =======
                     //count firing tiles
-                    gm.countFire(this, -1);
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
-                    //count firing tiles
-                    gm.countFire(this, -1);
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
->>>>>>> parent of 532f1e4... UI completed except save animal and save land
-=======
-                    //count firing tiles
-                    gm.countFire(this, -1);
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
-=======
-                    //count firing tiles
-                    gm.countFire(this, -1);
->>>>>>> parent of 1fe851a... Revert "UI completed except save animal and save land"
+                    gm.firingTiles--;
                 }
                     break;
             case BlockType.Forest:
@@ -223,8 +209,8 @@ public class BlockManager : MonoBehaviour
                         {
                             gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>().status = BlockStatus.Fire;
                         }
-                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
                         {
+                        if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y - 1][coordinate.x] != null)
                             gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>().status = BlockStatus.Fire;
                         }
                         if (Random.Range(0, 3) > 1 && gm.grid[coordinate.y + 1][coordinate.x] != null)
@@ -233,12 +219,22 @@ public class BlockManager : MonoBehaviour
                         }
                     }
                     if (fireTimer <= 0)
-                    {
                         type = BlockType.Desert;
+                    {
                         status = BlockStatus.Normal;
                         GetComponent<Renderer>().materials = new Material[1] { desert };
                     }
 =======
+        if (status == BlockStatus.Scorch)
+        {
+            GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material,scorchedLand };
+        }
+        else if (status == BlockStatus.Normal)
+        {
+            GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material};
+        }
+    }
+
     private void FireExtend()
     {
         fireExtended = true;
@@ -247,9 +243,9 @@ public class BlockManager : MonoBehaviour
         if (coordinate.x - 1 >= 0)
         {
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
                 
             }
@@ -257,27 +253,27 @@ public class BlockManager : MonoBehaviour
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
         {
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
             }
         }
         if (coordinate.y - 1 >= 0)
         {
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
             }
         }
         if (coordinate.y + 1 < gm.grid.Count)
         {
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.countFire(bm,1);
+                gm.firingTiles++;
                 bm.status = BlockStatus.Fire;
             }
         }
@@ -365,4 +361,5 @@ public class BlockManager : MonoBehaviour
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
         }
     }
+
 }

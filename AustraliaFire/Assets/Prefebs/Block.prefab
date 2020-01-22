@@ -114,6 +114,7 @@ MonoBehaviour:
   ocean: {fileID: 2100000, guid: e2cc7eb7913254746ac28b867bca688d, type: 2}
   shrub: {fileID: 2100000, guid: 3f918e7a7405f234991d259d5a6560f6, type: 2}
   wood: {fileID: 2100000, guid: 280069e11fa7ea4448b0d1f8fd84802f, type: 2}
+  scorchedLand: {fileID: 2100000, guid: 47679e0f433c4f948a0e0aedbab4d1ae, type: 2}
   type: 0
   status: 0
   hasAnimals: 0
