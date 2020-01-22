@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
                     {
                         print("picked fight fire");
                         //change the following later
-                        
+                        BM.fightFire();
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                         //count the number of firing tiles
                         

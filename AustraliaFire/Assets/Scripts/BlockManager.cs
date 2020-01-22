@@ -138,7 +138,7 @@ public class BlockManager : MonoBehaviour
         if (coordinate.x - 1 >= 0)
         {
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && bm.status != BlockManager.BlockStatus.Fire)
             {
                 bm.setFire();
             }
@@ -146,7 +146,7 @@ public class BlockManager : MonoBehaviour
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
         {
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && bm.status != BlockManager.BlockStatus.Fire)
             {
                 bm.setFire();
             }
@@ -154,7 +154,7 @@ public class BlockManager : MonoBehaviour
         if (coordinate.y - 1 >= 0)
         {
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && bm.status != BlockManager.BlockStatus.Fire)
             {
                 bm.setFire();
             }
@@ -162,7 +162,7 @@ public class BlockManager : MonoBehaviour
         if (coordinate.y + 1 < gm.grid.Count)
         {
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
-            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch /*&& status != BlockManager.BlockStatus.Fire*/)
+            if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && bm.status != BlockManager.BlockStatus.Fire)
             {
                 bm.setFire();
             }
