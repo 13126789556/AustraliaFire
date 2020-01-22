@@ -225,12 +225,10 @@ public class GameManager : MonoBehaviour
                     {
                         print("picked fight fire");
                         //change the following later
-                        BM.status = BlockManager.BlockStatus.Scorch;
-                        BM.GetComponent<Renderer>().materials = new Material[] { BM.GetComponent<Renderer>().materials[0], BM.scorchedLand };
-                        scorchTiles++;
+                        
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                         //count the number of firing tiles
-                        firingTiles--;
+                        
                         //? reset fire timer
                     }
                 }
@@ -240,10 +238,9 @@ public class GameManager : MonoBehaviour
                     {
                         print("picked clean water");
                         //change the following later
-                        BM.status = BlockManager.BlockStatus.Normal;
-                        BM.GetComponent<Renderer>().material = BM.ocean;
+                        BM.oceanSave();
                         //count the number of firing tiles
-                        pollutedTiles--;
+                        
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
                 }
@@ -253,10 +250,8 @@ public class GameManager : MonoBehaviour
                     {
                         print("picked recover land");
                         //change the following later
-                        BM.status = BlockManager.BlockStatus.Normal;
-                        BM.GetComponent<Renderer>().materials[1] = null;
+                        BM.recoverLand();
                         //count the number of firing tiles
-                        scorchTiles--;
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
                 }
