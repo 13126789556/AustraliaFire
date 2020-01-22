@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &296995452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5699773886627227269, guid: bfc18370bca65b841989864118796c33,
+    type: 3}
+  m_PrefabInstance: {fileID: 5699773885875382125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &325909371 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5699773886076310261, guid: bfc18370bca65b841989864118796c33,
@@ -561,6 +567,11 @@ PrefabInstance:
       propertyPath: actionButtons.Array.data[3]
       value: 
       objectReference: {fileID: 1625362373}
+    - target: {fileID: 5408898759382598122, guid: 331520c15051e7840a6dd5e2518bb91d,
+        type: 3}
+      propertyPath: costDescription
+      value: 
+      objectReference: {fileID: 296995452}
     - target: {fileID: 5408898759382598123, guid: 331520c15051e7840a6dd5e2518bb91d,
         type: 3}
       propertyPath: m_LocalPosition.x

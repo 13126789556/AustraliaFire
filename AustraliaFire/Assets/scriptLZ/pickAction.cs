@@ -15,18 +15,15 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public int moneyCoefficient = 1;
     public int peopleCoefficient = 1;
-    public int x;
-    public int y;
+    
 
     void Start()
     {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         GetComponent<Image>().color = Color.gray;
-        if (thisAction != GameManager.actionList.saveAnimal)
-        {
-            moneyCost = moneyCoefficient * x;
-            peopleCost = peopleCoefficient * y;
-        }
+        //for saving animal, the cost is the max cost
+        moneyCost = moneyCoefficient * GM.x;
+        peopleCost = peopleCoefficient * GM.y;
     }
 
     void Update()
@@ -71,6 +68,24 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             case GameManager.actionList.recoverLand:
                 if (GM.scorchTiles <= 0)
                 {
+                    GetComponent<Image>().color = Color.gray;
+                }
+                else
+                {
+                    if (GM.curActionButton == this)
+                    {
+                        GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        GetComponent<Image>().color = Color.white;
+                    }
+                }
+                break;
+            case GameManager.actionList.saveAnimal:
+                if (GM.firingTiles <= 0 && GM.scorchTiles <= 0)
+                {
+
                     GetComponent<Image>().color = Color.gray;
                 }
                 else

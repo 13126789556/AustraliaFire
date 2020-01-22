@@ -23,12 +23,19 @@ public class BlockManager : MonoBehaviour
     public bool hasBrevicep, hasDevil, hasDunnart, hasEmu, hasGoby, hasKoala, hasPlatypus, hasQuoll;
     private float fireTimer = 10;
     private float pollutedTimer = 10;
-    private float saveAnimalTimer = 10;
+    [HideInInspector]public float saveAnimalTimerMax = 10;
+    [HideInInspector]public float saveAnimalTimer;
     //[HideInInspector]
     public Vector2Int coordinate;
     [HideInInspector]
     public GameManager gm;
     private bool fireExtended = false;
+    //LZ------->
+    private int curAnimalPeopleCost;
+    private int cuAnimalMoneyCost;
+    [HideInInspector]public bool animalBurning;
+
+    //--<<<<<LZ
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +61,10 @@ public class BlockManager : MonoBehaviour
                 GetComponent<Renderer>().material = wood;
                 break;
         }
+        //LZ
+        saveAnimalTimerMax = fireTimer;
+        saveAnimalTimer = saveAnimalTimerMax;
+        
     }
 
     // Update is called once per frame
@@ -100,6 +111,17 @@ public class BlockManager : MonoBehaviour
         {
 
         }
+        //animal
+        if (hasAnimals && animalBurning)
+        {
+            print("animal burning");
+            saveAnimalTimer -= Time.deltaTime;
+            if (saveAnimalTimer <= 0)
+            {
+                animalBurning = false;
+                //has animal == false?
+            }
+        }
     }
 
     private void FireExtend()
@@ -112,9 +134,8 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x - 1].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.firingTiles++;
-                bm.status = BlockStatus.Fire;
-                
+                setFire(bm);
+
             }
         }
         if (coordinate.x + 1 < gm.grid[coordinate.y].Count)
@@ -122,8 +143,7 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y][coordinate.x + 1].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.firingTiles++;
-                bm.status = BlockStatus.Fire;
+                setFire(bm);
             }
         }
         if (coordinate.y - 1 >= 0)
@@ -131,8 +151,7 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y - 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.firingTiles++;
-                bm.status = BlockStatus.Fire;
+                setFire(bm);
             }
         }
         if (coordinate.y + 1 < gm.grid.Count)
@@ -140,10 +159,21 @@ public class BlockManager : MonoBehaviour
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && status != BlockManager.BlockStatus.Scorch && status != BlockManager.BlockStatus.Fire)
             {
-                gm.firingTiles++;
-                bm.status = BlockStatus.Fire;
+                setFire(bm);
             }
         }
+    }
+    public void setFire(BlockManager bm)
+    {
+        bm.hasAnimals = true;
+        gm.firingTiles++;
+        if (bm.hasAnimals)
+        {
+            bm.animalBurning = true;
+        }
+        bm.status = BlockStatus.Fire;
+        //test
+        
     }
     private void OceanPollute()
     {

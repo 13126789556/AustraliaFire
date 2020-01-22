@@ -65,6 +65,10 @@ public class GameManager : MonoBehaviour
 
     public pickAction[] actionButtons;
 
+    public int x;
+    public int y;
+    public GameObject costDescription;
+
     //---< LZ
     // Start is called before the first frame update
 
@@ -103,10 +107,7 @@ public class GameManager : MonoBehaviour
             //set a random block to fire
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Scorch && BM.status != BlockManager.BlockStatus.Fire)
             {
-                //count the number of firing tiles
-                firingTiles++;
-                //set fire on the tile
-                BM.status = BlockManager.BlockStatus.Fire;
+                BM.setFire(BM);
             }
             //----------< LZ
 
@@ -120,8 +121,7 @@ public class GameManager : MonoBehaviour
                 //----------< LZ
                 if (BM.status != BlockManager.BlockStatus.Scorch && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
                 {
-                    firingTiles++;
-                    grid[Random.Range(0, grid.Count)][Random.Range(0, grid[0].Count)].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
+                    BM.setFire(BM);
                 }
             }
             time = 0;
@@ -228,9 +228,10 @@ public class GameManager : MonoBehaviour
                         BM.status = BlockManager.BlockStatus.Scorch;
                         BM.GetComponent<Renderer>().materials = new Material[] { BM.GetComponent<Renderer>().materials[0], BM.scorchedLand };
                         scorchTiles++;
-                        reduceResource();
+                        reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                         //count the number of firing tiles
                         firingTiles--;
+                        //? reset fire timer
                     }
                 }
                 else if (BM.status == BlockManager.BlockStatus.Polluted && curActionButton.thisAction == GameManager.actionList.cleanWater && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
@@ -243,7 +244,7 @@ public class GameManager : MonoBehaviour
                         BM.GetComponent<Renderer>().material = BM.ocean;
                         //count the number of firing tiles
                         pollutedTiles--;
-                        reduceResource();
+                        reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
                 }
                 else if (BM.status == BlockManager.BlockStatus.Scorch && curActionButton.thisAction == GameManager.actionList.recoverLand && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
@@ -256,24 +257,41 @@ public class GameManager : MonoBehaviour
                         BM.GetComponent<Renderer>().materials[1] = null;
                         //count the number of firing tiles
                         scorchTiles--;
-                        reduceResource();
+                        reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
                 }
-                
-                //add later: add animal cost to block manager
-                if (BM.hasAnimals && BM.status == BlockManager.BlockStatus.Scorch && curActionButton.thisAction == GameManager.actionList.cleanWater)
+                //save aimal
+                else if (curActionButton.thisAction == GameManager.actionList.saveAnimal && BM.animalBurning)
                 {
-                    print("save animal");
-                    reduceResource();
+                    print("display description");
+                    float percent = BM.saveAnimalTimer / BM.saveAnimalTimerMax;
+                    int curMoneyCost = (int) (curActionButton.moneyCost * percent);
+                    int curPeopleCost = (int)(curActionButton.peopleCost * percent);
+                    //display animal cost when mouse over the map
+                    costDescription.SetActive(true);
+                    //when click, check if enough --> reduce resource, reduce animal
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        
+                        if (gold >= curMoneyCost && fireman >= curPeopleCost)
+                        {
+                            print("saved animal");
+                            reduceResource(curMoneyCost, curPeopleCost);
+                        }
+                    }
+                }
+                else if (!BM.animalBurning)
+                {
+                    costDescription.SetActive(false);
                 }
             }
         }
     }
     //deduct the cost from the total resource
-    private void reduceResource()
+    private void reduceResource(float moneyCost, float peopleCost)
     {
-        gold -= curActionButton.moneyCost;
-        fireman -= curActionButton.peopleCost;
+        gold -= moneyCost;
+        fireman -= peopleCost;
         updateResourceDisplay();
     }
 
