@@ -65,6 +65,9 @@ public class BlockManager : MonoBehaviour
 <<<<<<< HEAD
 =======
                     GetComponent<Renderer>().materials = new Material[1] { desert };
+<<<<<<< HEAD
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
+=======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
                 }
                     break;

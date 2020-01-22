@@ -83,10 +83,13 @@ public class GameManager : MonoBehaviour
             BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
             if (BM != null && BM.status != BlockManager.BlockStatus.Fire)
 <<<<<<< HEAD
+<<<<<<< HEAD
             {
                 firingTiles++;
                 print("firing tiles:" + firingTiles);
 =======
+=======
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
             {
                 firingTiles++;
                 print("firing tiles:" + firingTiles);
@@ -97,6 +100,9 @@ public class GameManager : MonoBehaviour
             if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean)
             {
                 BM.status = BlockManager.BlockStatus.Fire;
+<<<<<<< HEAD
+>>>>>>> parent of 532f1e4... UI completed except save animal and save land
+=======
 >>>>>>> parent of 532f1e4... UI completed except save animal and save land
             }
             //----------< LZ
