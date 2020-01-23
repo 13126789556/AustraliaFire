@@ -30,6 +30,7 @@ public class BlockManager : MonoBehaviour
     [HideInInspector]
     public GameManager gm;
     private bool fireExtended = false;
+    private bool pollutionExtended = false;
     //LZ------->
     private int curAnimalPeopleCost;
     private int cuAnimalMoneyCost;
@@ -110,9 +111,10 @@ public class BlockManager : MonoBehaviour
             if (status == BlockStatus.Polluted)
             {
                 pollutedTimer -= Time.deltaTime;
-                if (pollutedTimer <= 0)
+                if (pollutedTimer <= 0 && !pollutionExtended)
                 {
                     PollutionExtend();
+                    pollutionExtended = true;
                 }
             }
         }

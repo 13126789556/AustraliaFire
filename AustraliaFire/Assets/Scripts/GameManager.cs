@@ -278,7 +278,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-    }
+    }   
     //deduct the cost from the total resource
     private void reduceResource(float moneyCost, float peopleCost)
     {
