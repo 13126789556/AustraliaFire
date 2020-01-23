@@ -33,7 +33,9 @@ public class BlockManager : MonoBehaviour
     //LZ------->
     private int curAnimalPeopleCost;
     private int cuAnimalMoneyCost;
-    [HideInInspector]public bool animalBurning;
+    //[HideInInspector]public bool animalBurning;
+    [HideInInspector] public bool animalSavable;
+    public Material animalTest;
 
     //--<<<<<LZ
     // Start is called before the first frame update
@@ -64,7 +66,6 @@ public class BlockManager : MonoBehaviour
         //LZ
         saveAnimalTimerMax = fireTimer;
         saveAnimalTimer = saveAnimalTimerMax;
-        
     }
 
     // Update is called once per frame
@@ -95,15 +96,6 @@ public class BlockManager : MonoBehaviour
                     gm.firingTiles--;
                 }
             }
-            else if (status == BlockStatus.Scorch)
-            {
-                //add a scorch material later
-                GetComponent<Renderer>().materials = new Material[2] { GetComponent<Renderer>().material, scorchedLand };
-            }
-            else if (status == BlockStatus.Normal)
-            {
-                GetComponent<Renderer>().materials = new Material[1] { GetComponent<Renderer>().material};
-            }
         }
         else if(type == BlockType.Ocean)
         {
@@ -116,17 +108,28 @@ public class BlockManager : MonoBehaviour
                 status = BlockStatus.Normal;
             }
         }
-
-        
-        //animal
-        if (hasAnimals && animalBurning)
+        //animal burning timer
+        if (hasAnimals)
         {
-            print("animal burning");
             saveAnimalTimer -= Time.deltaTime;
             if (saveAnimalTimer <= 0)
             {
-                animalBurning = false;
-                //has animal == false?
+                //all animals died
+                //reset
+                hasAnimals = false;
+                saveAnimalTimer = saveAnimalTimerMax;
+                animalDied(false);
+                //display pictures
+                if (status == BlockStatus.Scorch)
+                {
+                    animalSavable = false;
+                    gm.savableAnimalTiles--;
+                    GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand, scorchedLand};
+                }
+                else
+                {
+                    GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0]};
+                }
             }
         }
     }
@@ -170,15 +173,18 @@ public class BlockManager : MonoBehaviour
     }
     public void setFire()
     {
-        hasAnimals = true;
+        //set fire on the tile
         gm.firingTiles++;
-        if (hasAnimals)
-        {
-            animalBurning = true;
-        }
         status = BlockStatus.Fire;
-        //test
-        
+        //decide if animal on the tile
+        if (Random.Range(0, 2) == 1)
+        {
+            hasAnimals = true;
+        }
+        else
+        {
+            hasAnimals = false;
+        }
     }
     private void OceanPollute()
     {
@@ -206,10 +212,18 @@ public class BlockManager : MonoBehaviour
     }
     public void fightFire()
     {
+        //switch fire to scorch
         status = BlockManager.BlockStatus.Scorch;
         GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand };
         gm.scorchTiles++;
         gm.firingTiles--;
+        //remain animal on the tile
+        if (hasAnimals)
+        {
+            animalSavable = true;
+            gm.savableAnimalTiles++;
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand,animalTest };
+        }
     }
     public void oceanSave()
     {
@@ -220,7 +234,75 @@ public class BlockManager : MonoBehaviour
     public void recoverLand()
     {
         status = BlockManager.BlockStatus.Normal;
-        GetComponent<Renderer>().materials[1] = null;
         gm.scorchTiles--;
+        if (hasAnimals)
+        {
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], animalTest};
+        }
+        else
+        {
+            GetComponent<Renderer>().materials[1] = null;
+        }
+    }
+    public void saveAnimal()
+    {
+        //animalBurning = false;
+        hasAnimals = false;
+        animalSavable = false;
+        gm.savableAnimalTiles--;
+        saveAnimalTimer = saveAnimalTimerMax;
+        if (status == BlockStatus.Scorch)
+        {
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand};
+        }
+        else if (status == BlockStatus.Normal)
+        {
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0]};
+        }
+        animalDied(true);
+    }
+    public void animalDied(bool saved)
+    {
+        print("animal died");
+        float coefficient = 1f;
+        if (saved)
+        {
+            coefficient = 0.5f;
+            print(": half");
+        }
+        if (hasBrevicep)
+        {
+            gm.brevicepNumber -= (int) (gm.brevicepNumberOneTile * coefficient);
+        }
+        if (hasDevil)
+        {
+            gm.devilNumber -= (int)(gm.devilNumberOneTile * coefficient);
+        }
+        if (hasDunnart)
+        {
+            gm.dunnartNubmer -= (int)(gm.dunnartNubmerOneTile * coefficient);
+        }
+        if (hasEmu)
+        {
+            gm.emuNumber -= (int)(gm.emuNumberOneTile * coefficient);
+        }
+        if (hasGoby)
+        {
+            gm.gobyNumber -= (int)(gm.gobyNumberOneTile * coefficient);
+        }
+        if (hasKoala)
+        {
+            gm.koalaNumber -= (int)(gm.koalaNumberOneTile * coefficient);
+        }
+        if (hasPlatypus)
+        {
+            gm.platypusNumber -= (int)(gm.platypusNumberOneTile * coefficient);
+        }
+        if (hasQuoll)
+        {
+            gm.quollNumber -= (int) (gm.quollNumberOneTile * coefficient);
+        }
+        //print("the numbers:" + gm.brevicepNumber + "2: " + gm.devilNumber + "3:" + gm.dunnartNubmer + "4:" + gm.emuNumber);
+        //add: display the number of lost animals
     }
 }

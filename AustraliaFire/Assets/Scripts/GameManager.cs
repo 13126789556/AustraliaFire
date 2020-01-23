@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     //
     public Text goldDisplay;
     public Text fireManDisplay;
+    public int brevicepNumberOneTile, devilNumberOneTile, dunnartNubmerOneTile, emuNumberOneTile, gobyNumberOneTile, koalaNumberOneTile, platypusNumberOneTile, quollNumberOneTile;
     //
     Ray ray;
     RaycastHit hit;
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int firingTiles;
     [HideInInspector] public int scorchTiles;
     [HideInInspector] public int pollutedTiles;
+    [HideInInspector] public int savableAnimalTiles;
 
     public pickAction[] actionButtons;
 
@@ -82,6 +84,17 @@ public class GameManager : MonoBehaviour
         koalaNumber = 100000;
         platypusNumber = 30000; 
         quollNumber = 10000;
+        //calculate the number of animals on each tile
+        brevicepNumberOneTile = brevicepNumber / 10;
+        devilNumberOneTile = devilNumber / 10;
+        dunnartNubmerOneTile = dunnartNubmer / 10;
+        emuNumberOneTile = emuNumber / 10;
+        gobyNumberOneTile = gobyNumber / 10;
+        koalaNumberOneTile = koalaNumber / 10;
+        platypusNumberOneTile = platypusNumber / 10;
+        quollNumberOneTile = quollNumber / 10;
+
+
         grid = new List<List<GameObject>>();
         GameObject tempGO = new GameObject("Map");
         map = tempGO;
@@ -255,8 +268,8 @@ public class GameManager : MonoBehaviour
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
                 }
-                //save aimal
-                else if (curActionButton.thisAction == GameManager.actionList.saveAnimal && BM.animalBurning)
+                //save aimal if burning and scoch
+                else if (curActionButton.thisAction == GameManager.actionList.saveAnimal && BM.animalSavable)
                 {
                     print("display description");
                     float percent = BM.saveAnimalTimer / BM.saveAnimalTimerMax;
@@ -271,11 +284,12 @@ public class GameManager : MonoBehaviour
                         if (gold >= curMoneyCost && fireman >= curPeopleCost)
                         {
                             print("saved animal");
+                            BM.saveAnimal();
                             reduceResource(curMoneyCost, curPeopleCost);
                         }
                     }
                 }
-                else if (!BM.animalBurning)
+                else if (!BM.hasAnimals)
                 {
                     costDescription.SetActive(false);
                 }
@@ -299,8 +313,6 @@ public class GameManager : MonoBehaviour
                 curActionButton.GetComponent<Image>().color = Color.white;
                 curActionButton = null;
             }
-            
-            
         }
     }
     public void countOceanPollute(BlockManager BM)

@@ -17,8 +17,6 @@ public class description : MonoBehaviour
         people = this.transform.Find("people").GetComponent<Text>();
         this.gameObject.SetActive(false);
     }
-
-
     //active the desciption box 
     public void activeDescription(int moneyCost, int FireManCost)
     {

@@ -127,8 +127,12 @@ MonoBehaviour:
   hasKoala: 0
   hasPlatypus: 0
   hasQuoll: 0
+  saveAnimalTimerMax: 10
+  saveAnimalTimer: 0
   coordinate: {x: 0, y: 0}
   gm: {fileID: 0}
+  animalBurning: 0
+  animalTest: {fileID: 2100000, guid: 34a496c838728214db11e823fd04165f, type: 2}
 --- !u!65 &3994999186681899621
 BoxCollider:
   m_ObjectHideFlags: 0

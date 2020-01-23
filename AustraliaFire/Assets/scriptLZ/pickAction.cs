@@ -83,7 +83,7 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
                 }
                 break;
             case GameManager.actionList.saveAnimal:
-                if (GM.firingTiles <= 0 && GM.scorchTiles <= 0)
+                if (GM.savableAnimalTiles <= 0)
                 {
 
                     GetComponent<Image>().color = Color.gray;
@@ -108,19 +108,13 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (thisAction != GameManager.actionList.saveAnimal)
-        {
-            description.activeDescription(moneyCost, peopleCost);
-        }
-            
+        description.activeDescription(moneyCost, peopleCost);
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (thisAction != GameManager.actionList.saveAnimal)
-        {
-            description.deActiveDescription();
-        }
+        description.deActiveDescription();
     }
 
     //choose an action
