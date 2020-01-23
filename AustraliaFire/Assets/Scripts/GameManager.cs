@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         map = tempGO;
         map.transform.position = Camera.main.transform.position;
         gold = 10000;
-        time = 0;
+        time = 2;
         fireman = 1000;
        
         GenarateMap();
@@ -100,30 +100,37 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 1.5f)
+        if (time >= 2f)
         {
-            int randomX = Random.Range(0, grid.Count), randomY = Random.Range(0, grid[0].Count);
-            BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
-            //set a random block to fire
-            if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Scorch && BM.status != BlockManager.BlockStatus.Fire)
+            for (int i = 0; i < 2; i++)
             {
-                BM.setFire();
+                if (Random.Range(0, 2) > (scorchTiles > 0 ? 1.5f : 0.5f))   //less fire when you have something to do
+                {
+                    int randomX = Random.Range(0, grid.Count);
+                    int randomY = Random.Range(0, grid[0].Count);
+                    BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
+                    //set a random block to fire
+                    if (BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Scorch && BM.status != BlockManager.BlockStatus.Fire)
+                    {
+                        BM.setFire();
+                    }
+                }
             }
             //----------< LZ
 
-            //grid[randomX][randomY].GetComponent<BlockManager>().status = BlockManager.BlockStatus.Fire;
-            if (Random.Range(0, 2) > 1)
-            {
-                // LZ -->>>>>   count the number of firing tiles
-                randomX = Random.Range(0, grid.Count);
-                randomY = Random.Range(0, grid[0].Count);
-                BM = grid[randomX][randomY].GetComponent<BlockManager>();
-                //----------< LZ
-                if (BM.status != BlockManager.BlockStatus.Scorch && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
-                {
-                    BM.setFire();
-                }
-            }
+            //random set second block to fire
+            //if (Random.Range(0, 2) > 0.5f)
+            //{
+            //    // LZ -->>>>>   count the number of firing tiles
+            //    randomX = Random.Range(0, grid.Count);
+            //    randomY = Random.Range(0, grid[0].Count);
+            //    BM = grid[randomX][randomY].GetComponent<BlockManager>();
+            //    //----------< LZ
+            //    if (BM.status != BlockManager.BlockStatus.Scorch && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
+            //    {
+            //        BM.setFire();
+            //    }
+            //}
             time = 0;
         }
         //check mouse over the map

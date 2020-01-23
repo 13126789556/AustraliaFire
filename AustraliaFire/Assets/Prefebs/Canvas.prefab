@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5699773886076310260}
   - component: {fileID: 5699773886076310261}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: CleanWaterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 5699773887709173008}
   m_Father: {fileID: 5699773887657369714}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -137,8 +137,6 @@ MonoBehaviour:
   peopleCost: 0
   moneyCoefficient: 1
   peopleCoefficient: 1
-  x: 1
-  y: 1
 --- !u!1 &5699773886171268521
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +228,7 @@ GameObject:
   - component: {fileID: 5699773886281911485}
   - component: {fileID: 5699773886281911458}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: RecoverLandButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +247,7 @@ RectTransform:
   m_Children:
   - {fileID: 5699773887055669139}
   m_Father: {fileID: 5699773887657369714}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -353,8 +351,6 @@ MonoBehaviour:
   peopleCost: 0
   moneyCoefficient: 1
   peopleCoefficient: 1
-  x: 1
-  y: 1
 --- !u!1 &5699773886420315343
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +740,7 @@ GameObject:
   - component: {fileID: 5699773886696254607}
   - component: {fileID: 5699773886696254604}
   m_Layer: 5
-  m_Name: fire
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -823,7 +819,7 @@ GameObject:
   - component: {fileID: 5699773886925527493}
   - component: {fileID: 5699773886925527498}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: SaveAnimalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -946,8 +942,6 @@ MonoBehaviour:
   peopleCost: 0
   moneyCoefficient: 1
   peopleCoefficient: 1
-  x: 1
-  y: 1
 --- !u!1 &5699773887055669136
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +954,7 @@ GameObject:
   - component: {fileID: 5699773887055668845}
   - component: {fileID: 5699773887055669138}
   m_Layer: 5
-  m_Name: recoverLand
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,7 +1018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: recover
+  m_Text: Recover Land
 --- !u!1 &5699773887251778023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1101,7 @@ GameObject:
   - component: {fileID: 5699773887358538892}
   - component: {fileID: 5699773887358538893}
   m_Layer: 5
-  m_Name: saveAnimal
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1171,7 +1165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: save animal
+  m_Text: Save Animals
 --- !u!1 &5699773887359135180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,7 +1254,7 @@ GameObject:
   - component: {fileID: 5699773887544260872}
   - component: {fileID: 5699773887544260873}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FightFireButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1383,8 +1377,6 @@ MonoBehaviour:
   peopleCost: 0
   moneyCoefficient: 1
   peopleCoefficient: 1
-  x: 1
-  y: 1
 --- !u!1 &5699773887550548504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,8 +1483,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5699773887544260878}
-  - {fileID: 5699773886076310266}
   - {fileID: 5699773886281911459}
+  - {fileID: 5699773886076310266}
   - {fileID: 5699773886925527499}
   m_Father: {fileID: 5699773886420315342}
   m_RootOrder: 1
@@ -1575,7 +1567,7 @@ GameObject:
   - component: {fileID: 5699773887709173010}
   - component: {fileID: 5699773887709173011}
   m_Layer: 5
-  m_Name: water
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

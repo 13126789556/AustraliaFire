@@ -107,7 +107,14 @@ public class BlockManager : MonoBehaviour
         }
         else if(type == BlockType.Ocean)
         {
-
+            if (status == BlockStatus.Polluted)
+            {
+                pollutedTimer -= Time.deltaTime;
+                if (pollutedTimer <= 0)
+                {
+                    PollutionExtend();
+                }
+            }
         }
         else if(type == BlockType.Desert)
         {
@@ -191,6 +198,31 @@ public class BlockManager : MonoBehaviour
                 if (coordinate.x + dx >= 0 
                     && coordinate.x + dx <= gm.grid[coordinate.y].Count 
                     && coordinate.y + dy >= 0 
+                    && coordinate.y + dy < gm.grid.Count)
+                {
+                    bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
+                    if (bm.type == BlockType.Ocean)
+                    {
+                        gm.countOceanPollute(bm);
+                        bm.status = BlockStatus.Polluted;
+                        bm.GetComponent<Renderer>().material = pollutedOcean;
+                    }
+                }
+            }
+        }
+    }
+
+    private void PollutionExtend()
+    {
+        BlockManager bm;
+        //check nearby 8 blocks
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                if (coordinate.x + dx >= 0
+                    && coordinate.x + dx <= gm.grid[coordinate.y].Count
+                    && coordinate.y + dy >= 0
                     && coordinate.y + dy < gm.grid.Count)
                 {
                     bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
