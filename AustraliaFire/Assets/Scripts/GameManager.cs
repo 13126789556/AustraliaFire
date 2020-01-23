@@ -99,6 +99,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //animals extinction
+        
+
+        //set fire by time
         time += Time.deltaTime;
         if (time >= 2f)
         {
@@ -117,20 +121,6 @@ public class GameManager : MonoBehaviour
                 }
             }
             //----------< LZ
-
-            //random set second block to fire
-            //if (Random.Range(0, 2) > 0.5f)
-            //{
-            //    // LZ -->>>>>   count the number of firing tiles
-            //    randomX = Random.Range(0, grid.Count);
-            //    randomY = Random.Range(0, grid[0].Count);
-            //    BM = grid[randomX][randomY].GetComponent<BlockManager>();
-            //    //----------< LZ
-            //    if (BM.status != BlockManager.BlockStatus.Scorch && BM.type != BlockManager.BlockType.Desert && BM.type != BlockManager.BlockType.Ocean && BM.status != BlockManager.BlockStatus.Fire)
-            //    {
-            //        BM.setFire();
-            //    }
-            //}
             time = 0;
         }
         //check mouse over the map
