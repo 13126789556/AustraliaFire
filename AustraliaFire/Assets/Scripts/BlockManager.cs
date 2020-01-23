@@ -174,7 +174,7 @@ public class BlockManager : MonoBehaviour
                 bm.setFire();
             }
         }
-        if (coordinate.y + 1 < gm.grid.Count)
+        if (coordinate.y + 1 < gm.grid.Count - 1)
         {
             bm = gm.grid[coordinate.y + 1][coordinate.x].GetComponent<BlockManager>();
             if (Random.Range(0, 3) > 1 && bm.type != BlockType.Ocean && bm.type != BlockType.Desert && bm.status != BlockManager.BlockStatus.Scorch && bm.status != BlockManager.BlockStatus.Fire)
@@ -207,9 +207,9 @@ public class BlockManager : MonoBehaviour
             for (int dy = -1; dy <= 1; dy++)
             {
                 if (coordinate.x + dx >= 0 
-                    && coordinate.x + dx <= gm.grid[coordinate.y].Count 
+                    && coordinate.x + dx < gm.grid[coordinate.y].Count
                     && coordinate.y + dy >= 0 
-                    && coordinate.y + dy < gm.grid.Count)
+                    && coordinate.y + dy < gm.grid.Count - 1)
                 {
                     bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
                     if (bm.type == BlockType.Ocean)
@@ -231,10 +231,11 @@ public class BlockManager : MonoBehaviour
         {
             for (int dy = -1; dy <= 1; dy++)
             {
+                //print(new Vector2(coordinate.y + dy, coordinate.x + dx));
                 if (coordinate.x + dx >= 0
-                    && coordinate.x + dx <= gm.grid[coordinate.y].Count
+                    && coordinate.x + dx < gm.grid[coordinate.y].Count 
                     && coordinate.y + dy >= 0
-                    && coordinate.y + dy < gm.grid.Count)
+                    && coordinate.y + dy < gm.grid.Count - 1)
                 {
                     bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
                     if (bm.type == BlockType.Ocean)

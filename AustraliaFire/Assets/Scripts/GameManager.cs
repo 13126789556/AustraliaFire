@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
             {
                 if (Random.Range(0, 2) > (scorchTiles > 0 ? 1.5f : 0.5f))   //less fire when you have something to do
                 {
-                    int randomX = Random.Range(0, grid.Count);
+                    int randomX = Random.Range(0, grid.Count - 1);
                     int randomY = Random.Range(0, grid[0].Count);
                     BlockManager BM = grid[randomX][randomY].GetComponent<BlockManager>();
                     //set a random block to fire
