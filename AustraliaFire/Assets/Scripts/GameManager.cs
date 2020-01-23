@@ -266,30 +266,20 @@ public class GameManager : MonoBehaviour
                     }
                 }
                 //save aimal if burning and scoch
-                else if (curActionButton.thisAction == GameManager.actionList.saveAnimal && BM.animalSavable)
+                else if (curActionButton.thisAction == GameManager.actionList.saveAnimal && BM.animalSavable && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
                 {
                     print("display description");
-                    float percent = BM.saveAnimalTimer / BM.saveAnimalTimerMax;
-                    int curMoneyCost = (int) (curActionButton.moneyCost * percent);
-                    int curPeopleCost = (int)(curActionButton.peopleCost * percent);
-                    //display animal cost when mouse over the map
-                    costDescription.SetActive(true);
-                    //when click, check if enough --> reduce resource, reduce animal
+                    //float percent = BM.saveAnimalTimer / BM.saveAnimalTimerMax;
+                    //int curMoneyCost = (int) (curActionButton.moneyCost * percent);
+                    //int curPeopleCost = (int)(curActionButton.peopleCost * percent);
                     if (Input.GetMouseButtonDown(0))
                     {
-                        
-                        if (gold >= curMoneyCost && fireman >= curPeopleCost)
-                        {
-                            print("saved animal");
-                            BM.saveAnimal();
-                            reduceResource(curMoneyCost, curPeopleCost);
-                        }
+                        print("saved animal");
+                        BM.saveAnimal();
+                        reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
                 }
-                else if (!BM.hasAnimals)
-                {
-                    costDescription.SetActive(false);
-                }
+
             }
         }
     }   

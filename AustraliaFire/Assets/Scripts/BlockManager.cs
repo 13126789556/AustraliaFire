@@ -129,10 +129,13 @@ public class BlockManager : MonoBehaviour
                 saveAnimalTimer = saveAnimalTimerMax;
                 animalDied(false);
                 //display pictures
+                if (animalSavable)
+                {
+                    gm.savableAnimalTiles--;
+                    animalSavable = false;
+                }
                 if (status == BlockStatus.Scorch)
                 {
-                    animalSavable = false;
-                    gm.savableAnimalTiles--;
                     GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand, scorchedLand};
                 }
                 else
@@ -267,7 +270,6 @@ public class BlockManager : MonoBehaviour
     }
     public void recoverLand()
     {
-        print("recovered land");
         status = BlockManager.BlockStatus.Normal;
         gm.scorchTiles--;
         if (hasAnimals)

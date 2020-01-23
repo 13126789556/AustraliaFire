@@ -108,12 +108,14 @@ public class pickAction : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        print("mouse enter");
         description.activeDescription(moneyCost, peopleCost);
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        print("mouse exit");
         description.deActiveDescription();
     }
 

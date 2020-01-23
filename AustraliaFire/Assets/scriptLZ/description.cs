@@ -9,17 +9,22 @@ public class description : MonoBehaviour
     private GameManager GM;
     private Text money;
     private Text people;
+    
+
+
     void Start()
     {
         //find objects
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         money = this.transform.Find("money").GetComponent<Text>();
         people = this.transform.Find("people").GetComponent<Text>();
+        print("start");
         this.gameObject.SetActive(false);
     }
     //active the desciption box 
     public void activeDescription(int moneyCost, int FireManCost)
     {
+        print("active");
         //update the number of people and money needed every time open the description box
         this.gameObject.SetActive(true);
         this.money.text = "Money Cost: " + moneyCost.ToString();
