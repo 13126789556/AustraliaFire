@@ -267,6 +267,7 @@ public class BlockManager : MonoBehaviour
     }
     public void recoverLand()
     {
+        print("recovered land");
         status = BlockManager.BlockStatus.Normal;
         gm.scorchTiles--;
         if (hasAnimals)
@@ -275,7 +276,7 @@ public class BlockManager : MonoBehaviour
         }
         else
         {
-            GetComponent<Renderer>().materials[1] = null;
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0]};
         }
     }
     public void saveAnimal()
