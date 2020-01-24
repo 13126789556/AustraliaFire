@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
     private float speed = 0.007f;
     Vector3 lastMousePos;
     private float minSize = 1f;
-    private float maxSize = 10f;
+    private float maxSize = 20f;
 
     private void Start()
     {

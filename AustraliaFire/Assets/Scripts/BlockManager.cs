@@ -22,7 +22,7 @@ public class BlockManager : MonoBehaviour
     public bool hasAnimals;
     public bool hasBrevicep, hasDevil, hasDunnart, hasEmu, hasGoby, hasKoala, hasPlatypus, hasQuoll;
     private float fireTimer = 10;
-    private float pollutedTimer = 10;
+    private float pollutedTimer = 12.5f;
     [HideInInspector]public float saveAnimalTimerMax = 10;
     [HideInInspector]public float saveAnimalTimer;
     //[HideInInspector]
@@ -82,7 +82,7 @@ public class BlockManager : MonoBehaviour
                 //nearby ocean block will be polluted immediately
                 OceanPollute();
                 //after few seconds, fire extends
-                if (fireTimer <= 8 && !fireExtended)
+                if (fireTimer <= 7 && !fireExtended)
                 {
                     FireExtend();
                     fireExtended = true;
@@ -206,9 +206,9 @@ public class BlockManager : MonoBehaviour
         {
             for (int dy = -1; dy <= 1; dy++)
             {
-                if (coordinate.x + dx >= 0 
+                if (coordinate.x + dx >= 0
                     && coordinate.x + dx < gm.grid[coordinate.y].Count
-                    && coordinate.y + dy >= 0 
+                    && coordinate.y + dy >= 0
                     && coordinate.y + dy < gm.grid.Count - 1)
                 {
                     bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
@@ -238,7 +238,7 @@ public class BlockManager : MonoBehaviour
                     && coordinate.y + dy < gm.grid.Count - 1)
                 {
                     bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
-                    if (bm.type == BlockType.Ocean)
+                    if (bm.type == BlockType.Ocean && Random.Range(0, 2) <= 1.2)    //random extend
                     {
                         gm.countOceanPollute(bm);
                         bm.status = BlockStatus.Polluted;
@@ -301,12 +301,12 @@ public class BlockManager : MonoBehaviour
     }
     public void animalDied(bool saved)
     {
-        print("animal died");
+        //print("animal died");
         float coefficient = 1f;
         if (saved)
         {
             coefficient = 0.5f;
-            print(": half");
+            //print(": half");
         }
         if (hasBrevicep)
         {

@@ -88,7 +88,7 @@ public class ExtionctionCardController : MonoBehaviour
                 timer = 0;
             }
         }
-        else if (gm.koalaNumber <= 0 && !KoalaEx)
+        else if (gm.koalaNumber <= 0 && !koalaExtincted)
         {
             image.sprite = KoalaEx;
             transform.position = displayPos;

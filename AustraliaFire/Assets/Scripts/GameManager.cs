@@ -117,11 +117,11 @@ public class GameManager : MonoBehaviour
 
         //set fire by time
         time += Time.deltaTime;
-        if (time >= 2f)
+        if (time >= 1.2f)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
-                if (Random.Range(0, 2) > (scorchTiles > 0 ? 1.5f : 0.5f))   //less fire when you have something to do
+                if (Random.Range(0, 2) > ((scorchTiles > 0 || pollutedTiles > 0 || savableAnimalTiles > 0) ? 1.5f : 0.5f))   //less fire when you have something to do
                 {
                     int randomX = Random.Range(0, grid.Count - 1);
                     int randomY = Random.Range(0, grid[0].Count);
@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour
                     //if click, take action
                     if (Input.GetMouseButtonDown(0))
                     {
-                        print("picked fight fire");
+                        //print("picked fight fire");
                         //change the following later
                         BM.fightFire();
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
@@ -246,7 +246,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        print("picked clean water");
+                        //print("picked clean water");
                         //change the following later
                         BM.oceanSave();
                         //count the number of firing tiles
@@ -258,7 +258,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        print("picked recover land");
+                        //print("picked recover land");
                         //change the following later
                         BM.recoverLand();
                         //count the number of firing tiles
@@ -268,13 +268,13 @@ public class GameManager : MonoBehaviour
                 //save aimal if burning and scoch
                 else if (curActionButton.thisAction == GameManager.actionList.saveAnimal && BM.animalSavable && gold >= curActionButton.moneyCost && fireman >= curActionButton.peopleCost)
                 {
-                    print("display description");
+                    //print("display description");
                     //float percent = BM.saveAnimalTimer / BM.saveAnimalTimerMax;
                     //int curMoneyCost = (int) (curActionButton.moneyCost * percent);
                     //int curPeopleCost = (int)(curActionButton.peopleCost * percent);
                     if (Input.GetMouseButtonDown(0))
                     {
-                        print("saved animal");
+                        //print("saved animal");
                         BM.saveAnimal();
                         reduceResource(curActionButton.moneyCost, curActionButton.peopleCost);
                     }
@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
         if (BM.status != BlockManager.BlockStatus.Polluted)
         {
             pollutedTiles++;
-            print("polluted tiles:" + pollutedTiles);
+            //print("polluted tiles:" + pollutedTiles);
         }
     }
     public void countScortchLand(BlockManager BM)
@@ -315,7 +315,7 @@ public class GameManager : MonoBehaviour
         if (BM.status != BlockManager.BlockStatus.Scorch)
         {
             scorchTiles++;
-            print("scortch tiles:" + scorchTiles);
+            //print("scortch tiles:" + scorchTiles);
         }
     }
 }
