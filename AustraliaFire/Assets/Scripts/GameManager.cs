@@ -98,13 +98,13 @@ public class GameManager : MonoBehaviour
         quollNumber = 10000;
         //calculate the number of animals on each tile
         brevicepNumberOneTile = brevicepNumber / 10;
-        devilNumberOneTile = devilNumber / 10;
-        dunnartNubmerOneTile = dunnartNubmer / 10;
+        devilNumberOneTile = devilNumber / 2;
+        dunnartNubmerOneTile = dunnartNubmer / 7;
         emuNumberOneTile = emuNumber / 10;
         gobyNumberOneTile = gobyNumber / 10;
-        koalaNumberOneTile = koalaNumber / 10;
-        platypusNumberOneTile = platypusNumber / 10;
-        quollNumberOneTile = quollNumber / 10;
+        koalaNumberOneTile = koalaNumber / 6;
+        platypusNumberOneTile = platypusNumber / 5;
+        quollNumberOneTile = quollNumber / 3;
 
 
         grid = new List<List<GameObject>>();
