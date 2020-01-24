@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23, y: -65.7}
+  m_AnchoredPosition: {x: -25, y: -157}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1878038512
@@ -389,7 +389,7 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 35
   peopleCoefficient: 1
 --- !u!1 &5699773886171268521
 GameObject:
@@ -603,7 +603,7 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 70
   peopleCoefficient: 1
 --- !u!1 &5699773886420315343
 GameObject:
@@ -1195,8 +1195,8 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
-  peopleCoefficient: 1
+  moneyCoefficient: 16
+  peopleCoefficient: 3
 --- !u!1 &5699773887055669136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1586,7 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 50
   peopleCoefficient: 1
 --- !u!1 &5699773887550548504
 GameObject:

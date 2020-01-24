@@ -561,6 +561,11 @@ PrefabInstance:
       objectReference: {fileID: 1826164087}
     - target: {fileID: 5408898759382598122, guid: 331520c15051e7840a6dd5e2518bb91d,
         type: 3}
+      propertyPath: animalDisplay
+      value: 
+      objectReference: {fileID: 190555299}
+    - target: {fileID: 5408898759382598122, guid: 331520c15051e7840a6dd5e2518bb91d,
+        type: 3}
       propertyPath: actionButtons.Array.data[0]
       value: 
       objectReference: {fileID: 605862093}
@@ -584,11 +589,6 @@ PrefabInstance:
       propertyPath: costDescription
       value: 
       objectReference: {fileID: 296995452}
-    - target: {fileID: 5408898759382598122, guid: 331520c15051e7840a6dd5e2518bb91d,
-        type: 3}
-      propertyPath: animalDisplay
-      value: 
-      objectReference: {fileID: 190555299}
     - target: {fileID: 5408898759382598123, guid: 331520c15051e7840a6dd5e2518bb91d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -653,14 +653,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1878038510, guid: bfc18370bca65b841989864118796c33, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878038510, guid: bfc18370bca65b841989864118796c33, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -157
-      objectReference: {fileID: 0}
     - target: {fileID: 5699773886076310266, guid: bfc18370bca65b841989864118796c33,
         type: 3}
       propertyPath: m_AnchorMin.y
