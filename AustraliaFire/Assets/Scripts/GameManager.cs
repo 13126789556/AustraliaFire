@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     //
     public Text goldDisplay;
     public Text fireManDisplay;
+    public Text animalDisplay;
     public int brevicepNumberOneTile, devilNumberOneTile, dunnartNubmerOneTile, emuNumberOneTile, gobyNumberOneTile, koalaNumberOneTile, platypusNumberOneTile, quollNumberOneTile;
     //
     Ray ray;
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
     public int x;
     public int y;
     public GameObject costDescription;
-
+    public int totalAnimalNumber;
     //---< LZ
     // Start is called before the first frame update
 
@@ -105,8 +106,10 @@ public class GameManager : MonoBehaviour
        
         GenarateMap();
         //update resource display at the beginning
-        updateResourceDisplay();
+        calculateAnimalLeft();
+        //updateResourceDisplay();
         curActionButton = null;
+        
     }
 
     // Update is called once per frame
@@ -215,6 +218,7 @@ public class GameManager : MonoBehaviour
     {
         goldDisplay.text = gold.ToString();
         fireManDisplay.text = fireman.ToString();
+        animalDisplay.text = totalAnimalNumber.ToString();
     }
 
     //action after clicking the map
@@ -317,5 +321,10 @@ public class GameManager : MonoBehaviour
             scorchTiles++;
             //print("scortch tiles:" + scorchTiles);
         }
+    }
+    public void calculateAnimalLeft()
+    {
+        totalAnimalNumber = brevicepNumber + devilNumber + dunnartNubmer + emuNumber + gobyNumber + koalaNumber + platypusNumber + quollNumber;
+        updateResourceDisplay();
     }
 }

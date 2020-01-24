@@ -341,6 +341,7 @@ public class BlockManager : MonoBehaviour
             gm.quollNumber -= (int) (gm.quollNumberOneTile * coefficient);
         }
         //print("the numbers:" + gm.brevicepNumber + "2: " + gm.devilNumber + "3:" + gm.dunnartNubmer + "4:" + gm.emuNumber);
+        gm.calculateAnimalLeft();
         //add: display the number of lost animals
     }
 }
