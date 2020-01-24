@@ -83,3 +83,8 @@ MonoBehaviour:
   x: 1
   y: 1
   costDescription: {fileID: 0}
+  totalAnimalNumber: 0
+  birdOnFire: {fileID: 2100000, guid: 34a496c838728214db11e823fd04165f, type: 2}
+  koalaOnFire: {fileID: 2100000, guid: 6506ea1f931238f429b903b41d7f38b7, type: 2}
+  platypusOnFire: {fileID: 2100000, guid: 74f85324d9cd9aa4596843e57d8d9595, type: 2}
+  devilOnFire: {fileID: 2100000, guid: 563e5728beed80b49959d2a00b755afd, type: 2}

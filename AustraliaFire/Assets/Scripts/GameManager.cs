@@ -78,6 +78,12 @@ public class GameManager : MonoBehaviour
     public int x;
     public int y;
     public GameObject costDescription;
+    public int totalAnimalNumber;
+
+    public Material birdOnFire;
+    public Material koalaOnFire;
+    public Material platypusOnFire;
+    public Material devilOnFire;
     //---< LZ
     // Start is called before the first frame update
 

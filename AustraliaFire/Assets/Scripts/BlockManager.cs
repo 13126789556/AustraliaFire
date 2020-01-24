@@ -36,7 +36,8 @@ public class BlockManager : MonoBehaviour
     private int cuAnimalMoneyCost;
     //[HideInInspector]public bool animalBurning;
     [HideInInspector] public bool animalSavable;
-    public Material animalTest;
+    [HideInInspector]public Material thisAnimalMaterial;
+    
 
     //--<<<<<LZ
     // Start is called before the first frame update
@@ -67,6 +68,7 @@ public class BlockManager : MonoBehaviour
         //LZ
         saveAnimalTimerMax = fireTimer;
         saveAnimalTimer = saveAnimalTimerMax;
+        thisAnimalMaterial = null;
     }
 
     // Update is called once per frame
@@ -125,9 +127,10 @@ public class BlockManager : MonoBehaviour
             {
                 //all animals died
                 //reset
-                hasAnimals = false;
+                //hasAnimals = false;
                 saveAnimalTimer = saveAnimalTimerMax;
                 animalDied(false);
+                
                 //display pictures
                 if (animalSavable)
                 {
@@ -192,6 +195,22 @@ public class BlockManager : MonoBehaviour
         if (Random.Range(0, 2) == 1)
         {
             hasAnimals = true;
+            if (hasPlatypus && gm.platypusNumber > 0)
+            {
+                thisAnimalMaterial = gm.platypusOnFire;
+            }
+            else if ((hasDevil && gm.devilNumber > 0)|| (hasQuoll && gm.quollNumber > 0))
+            {
+                thisAnimalMaterial = gm.devilOnFire;
+            }
+            else if ((hasDunnart && gm.dunnartNubmer >0) || (hasKoala && gm.koalaNumber > 0))
+            {
+                thisAnimalMaterial = gm.koalaOnFire;
+            }
+            else if (hasEmu && gm.emuNumber >0)
+            {
+                thisAnimalMaterial = gm.birdOnFire;
+            }
         }
         else
         {
@@ -260,7 +279,7 @@ public class BlockManager : MonoBehaviour
         {
             animalSavable = true;
             gm.savableAnimalTiles++;
-            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand,animalTest };
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], scorchedLand,thisAnimalMaterial };
         }
     }
     public void oceanSave()
@@ -275,7 +294,7 @@ public class BlockManager : MonoBehaviour
         gm.scorchTiles--;
         if (hasAnimals)
         {
-            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], animalTest};
+            GetComponent<Renderer>().materials = new Material[] { GetComponent<Renderer>().materials[0], thisAnimalMaterial};
         }
         else
         {
@@ -285,7 +304,7 @@ public class BlockManager : MonoBehaviour
     public void saveAnimal()
     {
         //animalBurning = false;
-        hasAnimals = false;
+        //hasAnimals = false;
         animalSavable = false;
         gm.savableAnimalTiles--;
         saveAnimalTimer = saveAnimalTimerMax;
@@ -301,47 +320,47 @@ public class BlockManager : MonoBehaviour
     }
     public void animalDied(bool saved)
     {
-        //print("animal died");
+        thisAnimalMaterial = null;
+        hasAnimals = false;
         float coefficient = 1f;
         if (saved)
         {
-            coefficient = 0.5f;
+            coefficient = 0;
             //print(": half");
         }
         if (hasBrevicep)
         {
-            gm.brevicepNumber -= (int) (gm.brevicepNumberOneTile * coefficient);
+
+            gm.brevicepNumber = Mathf.Max(0, (int)(gm.brevicepNumber - gm.brevicepNumberOneTile * coefficient));
         }
         if (hasDevil)
         {
-            gm.devilNumber -= (int)(gm.devilNumberOneTile * coefficient);
+            gm.devilNumber = Mathf.Max(0, gm.devilNumber - (int)(gm.devilNumberOneTile * coefficient));
         }
         if (hasDunnart)
         {
-            gm.dunnartNubmer -= (int)(gm.dunnartNubmerOneTile * coefficient);
+            gm.dunnartNubmer = Mathf.Max(0, gm.dunnartNubmer - (int)(gm.dunnartNubmerOneTile * coefficient));
         }
         if (hasEmu)
         {
-            gm.emuNumber -= (int)(gm.emuNumberOneTile * coefficient);
+            gm.emuNumber = Mathf.Max(0, gm.emuNumber - (int)(gm.emuNumberOneTile * coefficient));
         }
         if (hasGoby)
         {
-            gm.gobyNumber -= (int)(gm.gobyNumberOneTile * coefficient);
+            gm.gobyNumber = Mathf.Max(0, gm.gobyNumber - (int)(gm.gobyNumberOneTile * coefficient));
         }
         if (hasKoala)
         {
-            gm.koalaNumber -= (int)(gm.koalaNumberOneTile * coefficient);
+            gm.koalaNumber = Mathf.Max(0, gm.koalaNumber - (int)(gm.koalaNumberOneTile * coefficient));
         }
         if (hasPlatypus)
         {
-            gm.platypusNumber -= (int)(gm.platypusNumberOneTile * coefficient);
+            gm.platypusNumber = Mathf.Max(0, gm.platypusNumber- (int)(gm.platypusNumberOneTile * coefficient));
         }
         if (hasQuoll)
         {
-            gm.quollNumber -= (int) (gm.quollNumberOneTile * coefficient);
+            gm.quollNumber = Mathf.Max(0, gm.quollNumber - (int) (gm.quollNumberOneTile * coefficient));
         }
-        //print("the numbers:" + gm.brevicepNumber + "2: " + gm.devilNumber + "3:" + gm.dunnartNubmer + "4:" + gm.emuNumber);
         gm.calculateAnimalLeft();
-        //add: display the number of lost animals
     }
 }

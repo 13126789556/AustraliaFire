@@ -829,7 +829,7 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 35
   peopleCoefficient: 1
 --- !u!1 &5699773886171268521
 GameObject:
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 70
   peopleCoefficient: 1
 --- !u!1 &5699773886420315343
 GameObject:
@@ -1635,8 +1635,8 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
-  peopleCoefficient: 1
+  moneyCoefficient: 16
+  peopleCoefficient: 3
 --- !u!1 &5699773887055669136
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,7 +2028,7 @@ MonoBehaviour:
   description: {fileID: 5699773886627227268}
   moneyCost: 0
   peopleCost: 0
-  moneyCoefficient: 1
+  moneyCoefficient: 50
   peopleCoefficient: 1
 --- !u!1 &5699773887550548504
 GameObject:
