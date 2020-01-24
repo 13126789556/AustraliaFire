@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  gold: 0
-  fireman: 0
   block: {fileID: 2927952245229918395, guid: d915eb62d4c35a8498755d572d995dbb, type: 3}
   brevicepNumber: 0
   devilNumber: 0
@@ -56,11 +54,27 @@ MonoBehaviour:
   platypusNumber: 0
   quollNumber: 0
   curActionButton: {fileID: 0}
+  gold: 0
+  fireman: 0
+  totalAnimalNumber: 0
   goldDisplay: {fileID: 0}
   fireManDisplay: {fileID: 0}
+  animalDisplay: {fileID: 0}
+  goldBar: {fileID: 0}
+  fireManBar: {fileID: 0}
+  animalBar: {fileID: 0}
+  brevicepNumberOneTile: 0
+  devilNumberOneTile: 0
+  dunnartNubmerOneTile: 0
+  emuNumberOneTile: 0
+  gobyNumberOneTile: 0
+  koalaNumberOneTile: 0
+  platypusNumberOneTile: 0
+  quollNumberOneTile: 0
   firingTiles: 0
   scorchTiles: 0
   pollutedTiles: 0
+  savableAnimalTiles: 0
   actionButtons:
   - {fileID: 0}
   - {fileID: 0}

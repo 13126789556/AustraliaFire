@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour
     }
 
     public float time;
-    public float gold;
-    public float fireman;
     public GameObject block;
     //public GameObject valueUI;
     //public GameObject optionUI;
@@ -53,9 +51,18 @@ public class GameManager : MonoBehaviour
     //public int curfireManCost;
     //public int curMoneyCost;
     //
+    public float gold;
+    public float fireman;
+    public int totalAnimalNumber;
+    private float startGold;
+    private float startFireman;
+    private int startTotalAnimals;
     public Text goldDisplay;
     public Text fireManDisplay;
     public Text animalDisplay;
+    public Image goldBar;
+    public Image fireManBar;
+    public Image animalBar;
     public int brevicepNumberOneTile, devilNumberOneTile, dunnartNubmerOneTile, emuNumberOneTile, gobyNumberOneTile, koalaNumberOneTile, platypusNumberOneTile, quollNumberOneTile;
     //
     Ray ray;
@@ -71,7 +78,6 @@ public class GameManager : MonoBehaviour
     public int x;
     public int y;
     public GameObject costDescription;
-    public int totalAnimalNumber;
     //---< LZ
     // Start is called before the first frame update
 
@@ -106,10 +112,13 @@ public class GameManager : MonoBehaviour
        
         GenarateMap();
         //update resource display at the beginning
-        calculateAnimalLeft();
+        totalAnimalNumber = brevicepNumber + devilNumber + dunnartNubmer + emuNumber + gobyNumber + koalaNumber + platypusNumber + quollNumber;
         //updateResourceDisplay();
         curActionButton = null;
-        
+        startGold = gold;
+        startFireman = fireman;
+        startTotalAnimals = totalAnimalNumber;
+        updateResourceDisplay();
     }
 
     // Update is called once per frame
@@ -216,6 +225,9 @@ public class GameManager : MonoBehaviour
 
     public void updateResourceDisplay()
     {
+        goldBar.fillAmount = gold / startGold;
+        fireManBar.fillAmount = fireman / startFireman;
+        animalBar.fillAmount = (float)totalAnimalNumber / (float)startTotalAnimals;
         goldDisplay.text = gold.ToString();
         fireManDisplay.text = fireman.ToString();
         animalDisplay.text = totalAnimalNumber.ToString();
