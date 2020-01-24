@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
     public int x;
     public int y;
     public GameObject costDescription;
-    public int totalAnimalNumber;
 
     public Material birdOnFire;
     public Material koalaOnFire;
@@ -112,9 +111,9 @@ public class GameManager : MonoBehaviour
         GameObject tempGO = new GameObject("Map");
         map = tempGO;
         map.transform.position = Camera.main.transform.position;
-        gold = 10000;
+        gold = 4000000;
         time = 2;
-        fireman = 1000;
+        fireman = 6000;
        
         GenarateMap();
         //update resource display at the beginning

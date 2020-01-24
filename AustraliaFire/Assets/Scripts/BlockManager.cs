@@ -22,7 +22,7 @@ public class BlockManager : MonoBehaviour
     public bool hasAnimals;
     public bool hasBrevicep, hasDevil, hasDunnart, hasEmu, hasGoby, hasKoala, hasPlatypus, hasQuoll;
     private float fireTimer = 10;
-    private float pollutedTimer = 12.5f;
+    private float pollutedTimer = 12f;
     [HideInInspector]public float saveAnimalTimerMax = 10;
     [HideInInspector]public float saveAnimalTimer;
     //[HideInInspector]
@@ -37,7 +37,7 @@ public class BlockManager : MonoBehaviour
     //[HideInInspector]public bool animalBurning;
     [HideInInspector] public bool animalSavable;
     [HideInInspector]public Material thisAnimalMaterial;
-    
+    private float fishDecreaseByTime;
 
     //--<<<<<LZ
     // Start is called before the first frame update
@@ -109,6 +109,13 @@ public class BlockManager : MonoBehaviour
                 {
                     PollutionExtend();
                     pollutionExtended = true;
+                }
+                if (hasBrevicep)    //fish number decrese per second
+                {
+                    fishDecreaseByTime += Time.deltaTime;
+                    gm.brevicepNumber -= (int)fishDecreaseByTime * 60;
+                    fishDecreaseByTime = fishDecreaseByTime >= 1 ? 0 : fishDecreaseByTime;
+                    gm.calculateAnimalLeft();
                 }
             }
         }
@@ -257,7 +264,7 @@ public class BlockManager : MonoBehaviour
                     && coordinate.y + dy < gm.grid.Count - 1)
                 {
                     bm = gm.grid[coordinate.y + dy][coordinate.x + dx].GetComponent<BlockManager>();
-                    if (bm.type == BlockType.Ocean && Random.Range(0, 2) <= 1.2)    //random extend
+                    if (bm.type == BlockType.Ocean && bm.status != BlockStatus.Polluted && Random.Range(0, 2) < 1)    //random extend
                     {
                         gm.countOceanPollute(bm);
                         bm.status = BlockStatus.Polluted;
