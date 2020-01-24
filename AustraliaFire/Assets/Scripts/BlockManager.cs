@@ -325,7 +325,7 @@ public class BlockManager : MonoBehaviour
         float coefficient = 1f;
         if (saved)
         {
-            coefficient = 0;
+            coefficient = 0.5f;
             //print(": half");
         }
         if (hasBrevicep)

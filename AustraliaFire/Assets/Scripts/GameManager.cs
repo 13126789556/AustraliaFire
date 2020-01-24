@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     public int x;
     public int y;
     public GameObject costDescription;
-    public int totalAnimalNumber;
+    //public int totalAnimalNumber;
 
     public Material birdOnFire;
     public Material koalaOnFire;
@@ -99,13 +99,13 @@ public class GameManager : MonoBehaviour
         quollNumber = 10000;
         //calculate the number of animals on each tile
         brevicepNumberOneTile = brevicepNumber / 10;
-        devilNumberOneTile = devilNumber / 10;
-        dunnartNubmerOneTile = dunnartNubmer / 10;
+        devilNumberOneTile = devilNumber / 2;
+        dunnartNubmerOneTile = dunnartNubmer / 7;
         emuNumberOneTile = emuNumber / 10;
         gobyNumberOneTile = gobyNumber / 10;
-        koalaNumberOneTile = koalaNumber / 10;
-        platypusNumberOneTile = platypusNumber / 10;
-        quollNumberOneTile = quollNumber / 10;
+        koalaNumberOneTile = koalaNumber / 6;
+        platypusNumberOneTile = platypusNumber / 5;
+        quollNumberOneTile = quollNumber / 3;
 
 
         grid = new List<List<GameObject>>();
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
         map.transform.position = Camera.main.transform.position;
         gold = 10000;
         time = 2;
-        fireman = 1000;
+        fireman = 300;
        
         GenarateMap();
         //update resource display at the beginning
